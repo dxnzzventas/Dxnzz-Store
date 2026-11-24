@@ -453,6 +453,19 @@
       </div>
       <form onsubmit="submitReview(event)" class="space-y-3.5">
         <div>
+          <label class="block text-[11px] text-neutral-400 mb-1.5">Calificación (0 a 5 estrellas) *</label>
+          <div id="rev-rating-selector" class="flex items-center gap-1.5">
+            <button type="button" data-rating="0" onclick="setReviewRating(0)" class="rev-star-btn px-2 h-8 rounded border border-white/15 text-[11px] font-semibold text-neutral-400 hover:border-gold hover:text-gold transition">0</button>
+            <button type="button" data-rating="1" onclick="setReviewRating(1)" class="rev-star-btn w-8 h-8 rounded border border-white/15 text-base text-neutral-500 hover:border-gold hover:text-gold transition flex items-center justify-center">★</button>
+            <button type="button" data-rating="2" onclick="setReviewRating(2)" class="rev-star-btn w-8 h-8 rounded border border-white/15 text-base text-neutral-500 hover:border-gold hover:text-gold transition flex items-center justify-center">★</button>
+            <button type="button" data-rating="3" onclick="setReviewRating(3)" class="rev-star-btn w-8 h-8 rounded border border-white/15 text-base text-neutral-500 hover:border-gold hover:text-gold transition flex items-center justify-center">★</button>
+            <button type="button" data-rating="4" onclick="setReviewRating(4)" class="rev-star-btn w-8 h-8 rounded border border-white/15 text-base text-neutral-500 hover:border-gold hover:text-gold transition flex items-center justify-center">★</button>
+            <button type="button" data-rating="5" onclick="setReviewRating(5)" class="rev-star-btn w-8 h-8 rounded border border-white/15 text-base text-neutral-500 hover:border-gold hover:text-gold transition flex items-center justify-center">★</button>
+            <span id="rev-rating-label" class="text-[11px] text-gold font-medium ml-1.5">5 / 5</span>
+          </div>
+          <input id="rev-rating" type="hidden" value="5" />
+        </div>
+        <div>
           <label class="block text-[11px] text-neutral-400 mb-1">Tu nombre *</label>
           <input id="rev-author" type="text" required placeholder="Ej. Alejandro R." class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
         </div>
@@ -507,6 +520,7 @@
 
     let cart = [];
     let uploadedBase64Image = '';
+    let selectedReviewRating = 5;
 
     // Inicialización
     document.addEventListener('DOMContentLoaded', () => {
@@ -1119,7 +1133,41 @@
     }
 
     // Reseñas Verificadas
+    function setReviewRating(rating) {
+      const clamped = Math.max(0, Math.min(5, parseInt(rating, 10) || 0));
+      selectedReviewRating = clamped;
+      document.getElementById('rev-rating').value = clamped;
+      document.getElementById('rev-rating-label').textContent = `${clamped} / 5`;
+
+      document.querySelectorAll('.rev-star-btn').forEach(btn => {
+        const val = parseInt(btn.dataset.rating, 10);
+        if (val === 0) {
+          if (clamped === 0) {
+            btn.className = 'rev-star-btn px-2 h-8 rounded border border-gold bg-gold text-black text-[11px] font-semibold transition';
+          } else {
+            btn.className = 'rev-star-btn px-2 h-8 rounded border border-white/15 text-[11px] font-semibold text-neutral-400 hover:border-gold hover:text-gold transition';
+          }
+        } else {
+          if (clamped >= val) {
+            btn.className = 'rev-star-btn w-8 h-8 rounded border border-gold bg-black text-base text-gold hover:border-gold transition flex items-center justify-center';
+          } else {
+            btn.className = 'rev-star-btn w-8 h-8 rounded border border-white/15 text-base text-neutral-600 hover:border-gold hover:text-gold transition flex items-center justify-center';
+          }
+        }
+      });
+    }
+
+    function renderStarsDisplay(rating) {
+      const score = Math.max(0, Math.min(5, parseInt(rating, 10) || 0));
+      let starsHtml = '';
+      for (let i = 1; i <= 5; i++) {
+        starsHtml += `<span class="${i <= score ? 'text-gold' : 'text-neutral-700'}">★</span>`;
+      }
+      return `<div class="flex items-center gap-1 text-sm leading-none" aria-label="${score} de 5 estrellas">${starsHtml}<span class="text-[10px] text-neutral-400 ml-1">${score}/5</span></div>`;
+    }
+
     function openReviewModal() {
+      setReviewRating(5);
       document.getElementById('review-modal').classList.remove('hidden');
     }
 
@@ -1132,18 +1180,21 @@
       const author = document.getElementById('rev-author').value.trim();
       const product = document.getElementById('rev-product').value.trim();
       const comment = document.getElementById('rev-comment').value.trim();
+      const rating = Math.max(0, Math.min(5, parseInt(document.getElementById('rev-rating').value, 10) || 0));
       if (!author || !product || !comment) return;
 
       reviews.unshift({
         id: 'rev_' + Date.now(),
         author,
         product,
-        comment
+        comment,
+        rating
       });
       localStorage.setItem(STORAGE_KEYS.REVIEWS, JSON.stringify(reviews));
       document.getElementById('rev-author').value = '';
       document.getElementById('rev-product').value = '';
       document.getElementById('rev-comment').value = '';
+      setReviewRating(5);
       closeReviewModal();
       renderReviews();
     }
@@ -1170,10 +1221,11 @@
       grid.innerHTML = reviews.map(r => `
         <div class="bg-[#070707] border border-white/10 rounded-lg p-5 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center justify-between mb-2.5">
               <span class="text-[10px] uppercase tracking-widest text-gold">Compra Verificada</span>
               ${isOwnerLoggedIn ? `<button onclick="deleteReview('${r.id}')" class="text-[10px] text-neutral-500 hover:text-red-400">Eliminar</button>` : ''}
             </div>
+            <div class="mb-3">${renderStarsDisplay(r.rating)}</div>
             <p class="text-xs text-neutral-300 leading-relaxed">"${r.comment}"</p>
           </div>
           <div class="border-t border-white/10 mt-4 pt-3">
