@@ -1,1584 +1,1049 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dxnzz Store | Luxury Headwear</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter & Oswald -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Tone.js para alerta sonora discreta de venta -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Oswald', 'sans-serif'],
-                    },
-                    colors: {
-                        pureBlack: '#000000',
-                        obsidian: '#080808',
-                        carbon: '#0F0F0F',
-                        carbonHover: '#161616',
-                        silver: '#A1A1AA',
-                        gold: {
-                            DEFAULT: '#C5A059',
-                            bright: '#D4AF37',
-                            deep: '#8E6F3E',
-                        }
-                    }
-                }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dxnzz Store — Gorras Exclusivas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#000000',
+            surface: '#080808',
+            card: '#0D0D0D',
+            gold: {
+              DEFAULT: '#D4AF37',
+              dark: '#A6831E',
+              light: '#F2D675'
             }
+          },
+          fontFamily: {
+            display: ['Cinzel', 'serif'],
+            sans: ['Inter', 'sans-serif']
+          }
         }
-    </script>
-
-    <style>
-        body {
-            background-color: #000000;
-            color: #FFFFFF;
-            overflow-x: hidden;
-        }
-        /* Scrollbar minimalista negro y dorado */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #000000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1F1F1F;
-            border-radius: 9999px;
-            border: 1px solid rgba(197, 160, 89, 0.35);
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #C5A059;
-        }
-        .gold-text-metallic {
-            background: linear-gradient(135deg, #E2C785 0%, #C5A059 55%, #9B7B3C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .luxury-border {
-            border: 1px solid rgba(197, 160, 89, 0.22);
-        }
-        .luxury-border-subtle {
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .product-card {
-            background-color: #080808;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: border-color 0.3s ease, transform 0.3s ease;
-        }
-        .product-card:hover {
-            border-color: rgba(197, 160, 89, 0.45);
-            transform: translateY(-2px);
-        }
-        @keyframes slideInRight {
-            from { transform: translateX(110%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        .animate-toast {
-            animation: slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+    }
+    .gold-border {
+      border-color: rgba(212, 175, 55, 0.28);
+    }
+    .gold-border-subtle {
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #262626;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #D4AF37;
+    }
+  </style>
 </head>
-<body class="bg-pureBlack text-white font-sans antialiased selection:bg-gold selection:text-black">
+<body class="bg-black text-white min-h-screen flex flex-col selection:bg-gold selection:text-black">
 
-    <!-- ==================== BARRA SUPERIOR SOBRIA ==================== -->
-    <div class="bg-obsidian border-b border-white/10 text-[11px] py-2 px-4 text-center tracking-[0.18em] uppercase text-silver">
-        <span class="text-gold-bright font-semibold">DXNZZ STORE</span>
-        <span class="mx-2 text-white/25">•</span>
-        <span>Envío gratis desde <span class="text-white font-medium">$1,299 MXN</span></span>
-        <span class="hidden sm:inline mx-2 text-white/25">•</span>
-        <span class="hidden sm:inline">Pago seguro con tarjeta en línea</span>
+  <!-- Barra de Notificación Rápida (Solo visible en sesión de dueño al recibir pedido) -->
+  <div id="owner-alert-banner" class="hidden fixed top-4 right-4 z-50 max-w-sm w-full bg-[#0A0A0A] border border-gold shadow-2xl rounded-lg p-4 transition-all">
+    <div class="flex items-start justify-between gap-3">
+      <div>
+        <span class="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">Nueva Compra Registrada</span>
+        <h4 id="alert-customer-name" class="text-sm font-semibold text-white mt-0.5">Cliente</h4>
+        <p id="alert-order-summary" class="text-xs text-neutral-400 mt-1"></p>
+        <p id="alert-customer-phone" class="text-xs text-gold mt-1 font-medium"></p>
+      </div>
+      <button onclick="closeAlertBanner()" class="text-neutral-500 hover:text-white text-xs">✕</button>
+    </div>
+    <div class="mt-3 flex gap-2">
+      <a id="alert-wa-link" href="#" target="_blank" class="flex-1 text-center bg-gold text-black text-xs font-semibold py-2 rounded hover:bg-gold-light transition">
+        Contactar por WhatsApp
+      </a>
+      <button onclick="openOwnerPanel('orders'); closeAlertBanner();" class="px-3 py-2 border border-white/15 text-xs text-white rounded hover:border-gold transition">
+        Ver Pedido
+      </button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-black/95 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded border border-gold/60 flex items-center justify-center bg-black">
+          <span class="font-display text-gold font-bold text-sm tracking-wider">DX</span>
+        </div>
+        <div>
+          <span class="font-display text-base sm:text-lg tracking-[0.18em] text-white font-semibold block leading-none">DXNZZ STORE</span>
+          <span class="text-[9px] tracking-[0.28em] text-gold/80 uppercase block mt-1">Headwear</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Botón visible SOLO cuando NO hay sesión de dueño -->
+        <button id="btn-login-open" onclick="openLoginModal()" class="text-xs text-neutral-400 hover:text-white border border-white/10 hover:border-white/25 px-3 py-1.5 rounded transition">
+          Iniciar sesión
+        </button>
+
+        <!-- Controles visibles SOLO cuando el dueño inició sesión -->
+        <div id="owner-header-controls" class="hidden flex items-center gap-2">
+          <button onclick="openOwnerPanel('products')" class="relative text-xs bg-black border border-gold/70 text-gold hover:bg-gold hover:text-black px-3 py-1.5 rounded font-medium transition flex items-center gap-1.5">
+            <span>Panel Dueño</span>
+            <span id="owner-orders-badge" class="hidden bg-gold text-black text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
+          </button>
+          <button onclick="logoutOwner()" class="text-xs text-neutral-400 hover:text-white border border-white/10 px-2.5 py-1.5 rounded transition" title="Cerrar sesión">
+            Salir
+          </button>
+        </div>
+
+        <!-- Carrito -->
+        <button onclick="openCartModal()" class="relative bg-white text-black hover:bg-gold hover:text-black px-3.5 py-1.5 rounded text-xs font-semibold tracking-wide transition flex items-center gap-2">
+          <span>Bolsa</span>
+          <span id="cart-count" class="bg-black text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Minimalista -->
+  <section class="border-b border-white/10 py-14 sm:py-20 px-4 text-center bg-black">
+    <div class="max-w-2xl mx-auto">
+      <p class="text-[11px] uppercase tracking-[0.35em] text-gold mb-3">Edición Exclusiva</p>
+      <h1 class="font-display text-3xl sm:text-5xl tracking-[0.12em] text-white font-semibold">DXNZZ STORE</h1>
+      <p class="text-neutral-400 text-xs sm:text-sm mt-4 max-w-md mx-auto leading-relaxed font-light">
+        Piezas seleccionadas en negro profundo y detalles dorados. Compra directa con pago en línea y atención personalizada.
+      </p>
+      <div class="mt-7 flex items-center justify-center gap-4">
+        <a href="#catalogo" class="border border-gold/70 text-gold hover:bg-gold hover:text-black text-xs uppercase tracking-[0.2em] px-6 py-2.5 rounded transition">
+          Ver Catálogo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Nuestras Gorras (Sin opciones de filtro) -->
+  <main id="catalogo" class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <div class="flex items-end justify-between border-b border-white/10 pb-4 mb-8">
+      <div>
+        <span class="text-[10px] uppercase tracking-[0.28em] text-gold block">Catálogo Oficial</span>
+        <h2 class="font-display text-xl sm:text-2xl tracking-[0.12em] text-white mt-1">NUESTRAS GORRAS</h2>
+      </div>
+      <span id="catalog-count-label" class="text-xs text-neutral-500">0 modelos</span>
     </div>
 
-    <!-- ==================== ENCABEZADO / NAVBAR ==================== -->
-    <header class="sticky top-0 z-40 bg-pureBlack/95 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-            <!-- Logo / Marca -->
-            <a href="#" class="flex items-center gap-3.5 group">
-                <div class="w-11 h-11 rounded-xl bg-obsidian luxury-border flex items-center justify-center group-hover:border-gold-bright transition-colors">
-                    <span class="font-display text-2xl font-bold gold-text-metallic tracking-tighter">DX</span>
-                </div>
-                <div>
-                    <h1 class="font-display text-2xl sm:text-[28px] font-bold tracking-wider uppercase leading-none">
-                        <span class="text-white">DXNZZ</span> <span class="gold-text-metallic">STORE</span>
-                    </h1>
-                    <p class="text-[9px] uppercase tracking-[0.28em] text-silver mt-1">Luxury Headwear</p>
-                </div>
-            </a>
+    <!-- Grid de Productos -->
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Renderizado dinámico -->
+    </div>
 
-            <!-- Navegación Desktop -->
-            <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.16em] font-medium">
-                <a href="#catalogo" class="text-silver hover:text-white transition-colors">Catálogo</a>
-                <a href="#resenas" class="text-silver hover:text-white transition-colors">Reseñas</a>
-                <button onclick="openAdminModal('orders')" class="text-silver hover:text-gold-bright transition-colors flex items-center gap-2 uppercase tracking-[0.16em]">
-                    <i class="fa-regular fa-bell text-gold"></i>
-                    <span>Pedidos</span>
-                    <span id="nav-orders-badge" class="bg-obsidian luxury-border text-gold-bright text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
-                </button>
-            </nav>
+    <!-- Estado vacío -->
+    <div id="empty-catalog-state" class="hidden text-center py-16 border border-white/10 rounded-lg bg-[#050505]">
+      <p class="text-sm text-neutral-300 tracking-wide">Aún no hay gorras publicadas en el catálogo.</p>
+      <p class="text-xs text-neutral-500 mt-1">Vuelve pronto para conocer los próximos lanzamientos de Dxnzz Store.</p>
+      <button id="owner-empty-add-btn" onclick="openOwnerPanel('products')" class="hidden mt-5 border border-gold text-gold hover:bg-gold hover:text-black text-xs uppercase tracking-widest px-5 py-2 rounded transition">
+        + Subir mi primera gorra
+      </button>
+    </div>
 
-            <!-- Acciones Derecha: Dueño + Carrito -->
-            <div class="flex items-center gap-2.5">
-                <button onclick="openAdminModal('products')"
-                    class="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-xs font-medium tracking-wider uppercase text-white transition-all"
-                    title="Subir gorras, ver pedidos y configurar pagos">
-                    <i class="fa-solid fa-store text-gold"></i>
-                    <span>Dueño</span>
-                </button>
-
-                <button onclick="toggleCartDrawer(true)"
-                    class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-xs font-semibold tracking-wider uppercase text-white transition-all">
-                    <i class="fa-solid fa-bag-shopping text-gold-bright text-sm"></i>
-                    <span class="hidden sm:inline">Carrito</span>
-                    <span id="cart-count-badge" class="bg-gold text-black text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
-                </button>
-            </div>
+    <!-- Sección Clientes Verificados -->
+    <section class="mt-20 pt-12 border-t border-white/10">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div>
+          <span class="text-[10px] uppercase tracking-[0.28em] text-gold block">Comunidad</span>
+          <h3 class="font-display text-lg sm:text-xl tracking-[0.12em] text-white mt-1">CLIENTES VERIFICADOS</h3>
         </div>
-    </header>
+        <button onclick="openReviewModal()" class="self-start sm:self-auto border border-white/15 hover:border-gold text-xs text-neutral-300 hover:text-gold px-4 py-2 rounded transition">
+          Escribir una reseña
+        </button>
+      </div>
 
-    <!-- ==================== PORTADA MINIMALISTA DE LUJO ==================== -->
-    <section class="relative border-b border-white/10 bg-pureBlack">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(197,160,89,0.07),transparent_60%)] pointer-events-none"></div>
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 text-center relative z-10 space-y-6">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-obsidian luxury-border text-[11px] font-medium text-gold uppercase tracking-[0.22em]">
-                <span class="w-1.5 h-1.5 rounded-full bg-gold-bright"></span>
-                Colección Exclusiva
-            </div>
-
-            <h2 class="font-display text-4xl sm:text-6xl font-bold uppercase tracking-tight leading-[1.05] text-white">
-                Estilo Sobrio & <span class="gold-text-metallic">Exclusivo</span>
-            </h2>
-
-            <p class="text-silver text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-normal">
-                Piezas seleccionadas con acabados de alta gama. Compra en línea con tarjeta de forma segura y recibe seguimiento directo a tu WhatsApp.
-            </p>
-
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
-                <a href="#catalogo" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-gold-bright font-semibold uppercase tracking-[0.16em] text-xs transition-all">
-                    Explorar Catálogo
-                </a>
-                <button onclick="openAdminModal('products')" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-pureBlack hover:bg-obsidian luxury-border-subtle hover:border-white/25 text-silver hover:text-white font-medium uppercase tracking-[0.14em] text-xs transition-all">
-                    <i class="fa-solid fa-plus text-gold mr-2"></i>Subir Producto
-                </button>
-            </div>
-
-            <div class="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 max-w-lg mx-auto">
-                <div>
-                    <p class="text-white font-display text-sm sm:text-base font-semibold tracking-wider uppercase">Edición Limitada</p>
-                    <p class="text-[11px] text-silver mt-0.5">Piezas seleccionadas</p>
-                </div>
-                <div>
-                    <p class="text-gold-bright font-display text-sm sm:text-base font-semibold tracking-wider uppercase">Pago Seguro</p>
-                    <p class="text-[11px] text-silver mt-0.5">Mercado Pago SSL</p>
-                </div>
-                <div>
-                    <p class="text-white font-display text-sm sm:text-base font-semibold tracking-wider uppercase">Atención Directa</p>
-                    <p class="text-[11px] text-silver mt-0.5">Confirmación WhatsApp</p>
-                </div>
-            </div>
-        </div>
+      <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- Renderizado dinámico -->
+      </div>
+      <p id="empty-reviews-msg" class="text-xs text-neutral-500 py-6 text-center border border-white/5 rounded-lg">
+        Sé el primero en compartir tu experiencia con tu gorra de Dxnzz Store.
+      </p>
     </section>
+  </main>
 
-    <!-- ==================== SECCIÓN NUESTRAS GORRAS (LIMPIA SIN FILTROS) ==================== -->
-    <main id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
-        <div class="mb-10">
-            <span class="text-gold text-xs font-semibold uppercase tracking-[0.28em] block">Catálogo Oficial</span>
-            <h2 class="font-display text-3xl sm:text-5xl font-bold text-white uppercase tracking-tight mt-1">Nuestras Gorras</h2>
-        </div>
-
-        <!-- Cuadrícula limpia de productos subidos por el dueño -->
-        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Renderizado dinámicamente -->
-        </div>
-    </main>
-
-    <!-- ==================== SECCIÓN CLIENTES VERIFICADOS ==================== -->
-    <section id="resenas" class="border-t border-white/10 bg-obsidian/50 py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-                <div>
-                    <span class="text-gold text-xs font-semibold uppercase tracking-[0.28em] block">Comunidad Dxnzz</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white uppercase mt-1">Clientes Verificados</h2>
-                </div>
-                <button onclick="toggleReviewForm()" class="px-5 py-2.5 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-gold-bright text-xs uppercase tracking-wider font-semibold transition-all self-start sm:self-auto">
-                    <i class="fa-regular fa-pen-to-square mr-2"></i>Escribir una reseña
-                </button>
-            </div>
-
-            <!-- Formulario colapsable para nueva reseña -->
-            <div id="review-form-box" class="hidden mb-10 p-6 rounded-2xl bg-obsidian luxury-border max-w-2xl">
-                <h3 class="font-display text-lg font-bold uppercase text-white tracking-wide mb-4">Comparte tu experiencia con Dxnzz Store</h3>
-                <form onsubmit="submitReview(event)" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[11px] text-silver uppercase tracking-wider mb-1.5">Tu Nombre *</label>
-                            <input type="text" id="rev-author" required placeholder="Ej. Carlos Mendoza" class="w-full px-4 py-2.5 rounded-xl bg-pureBlack border border-white/15 focus:border-gold text-white text-sm outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] text-silver uppercase tracking-wider mb-1.5">Modelo que compraste *</label>
-                            <input type="text" id="rev-product" required placeholder="Ej. Gorra Dxnzz Edición Negra" class="w-full px-4 py-2.5 rounded-xl bg-pureBlack border border-white/15 focus:border-gold text-white text-sm outline-none">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[11px] text-silver uppercase tracking-wider mb-1.5">Calificación</label>
-                        <select id="rev-rating" class="w-full sm:w-52 px-4 py-2.5 rounded-xl bg-pureBlack border border-white/15 focus:border-gold text-gold-bright text-sm outline-none font-medium">
-                            <option value="5">★★★★★ — Excelente (5/5)</option>
-                            <option value="4">★★★★☆ — Muy buena (4/5)</option>
-                            <option value="3">★★★☆☆ — Buena (3/5)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[11px] text-silver uppercase tracking-wider mb-1.5">Tu Comentario *</label>
-                        <textarea id="rev-comment" rows="3" required placeholder="Cuéntanos qué te pareció la calidad y el envío..." class="w-full px-4 py-2.5 rounded-xl bg-pureBlack border border-white/15 focus:border-gold text-white text-sm outline-none"></textarea>
-                    </div>
-                    <div class="flex justify-end gap-3 pt-1">
-                        <button type="button" onclick="toggleReviewForm()" class="px-4 py-2 rounded-xl text-silver hover:text-white text-xs uppercase tracking-wider">Cancelar</button>
-                        <button type="submit" class="px-6 py-2.5 rounded-xl bg-obsidian luxury-border hover:border-gold-bright text-gold-bright font-semibold text-xs uppercase tracking-wider">Publicar Reseña</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Contenedor de reseñas -->
-            <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Renderizado dinámicamente -->
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== PIE DE PÁGINA ==================== -->
-    <footer class="border-t border-white/10 bg-pureBlack py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="text-center md:text-left">
-                <h3 class="font-display text-xl font-bold uppercase tracking-wider">
-                    <span class="text-white">DXNZZ</span> <span class="gold-text-metallic">STORE</span>
-                </h3>
-                <p class="text-xs text-silver mt-1">© 2026 Dxnzz Store. Todos los derechos reservados.</p>
-            </div>
-            <div class="flex flex-wrap items-center justify-center gap-4 text-xs text-silver">
-                <button onclick="openAdminModal('products')" class="hover:text-gold-bright transition-colors">
-                    <i class="fa-solid fa-lock mr-1.5 text-gold"></i>Subir Productos
-                </button>
-                <span class="text-white/20">•</span>
-                <button onclick="openAdminModal('orders')" class="hover:text-gold-bright transition-colors">
-                    Pedidos Recibidos
-                </button>
-                <span class="text-white/20">•</span>
-                <button onclick="openAdminModal('settings')" class="hover:text-gold-bright transition-colors">
-                    Mercado Pago y WhatsApp
-                </button>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ==================== DRAWER LATERAL: CARRITO Y PAGO ==================== -->
-    <div id="cart-overlay" class="fixed inset-0 z-50 hidden">
-        <div onclick="toggleCartDrawer(false)" class="absolute inset-0 bg-black/85 backdrop-blur-sm"></div>
-
-        <aside class="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-obsidian border-l border-white/15 flex flex-col shadow-2xl">
-            <!-- Header del Drawer -->
-            <div class="p-5 border-b border-white/10 flex items-center justify-between bg-pureBlack">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-bag-shopping text-gold-bright text-lg"></i>
-                    <h3 id="drawer-title" class="font-display text-xl font-bold uppercase tracking-wide text-white">Tu Carrito</h3>
-                </div>
-                <button onclick="toggleCartDrawer(false)" class="w-9 h-9 rounded-xl bg-obsidian hover:bg-carbonHover border border-white/10 text-silver hover:text-white flex items-center justify-center">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Paso 1: Lista de Productos en Carrito -->
-            <div id="cart-step-items" class="flex-1 flex flex-col overflow-hidden">
-                <div id="cart-items-container" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
-
-                <div id="cart-footer" class="p-5 bg-pureBlack border-t border-white/10 space-y-3">
-                    <div class="flex justify-between text-xs text-silver">
-                        <span>Subtotal</span>
-                        <span id="cart-subtotal" class="text-white font-medium">$0 MXN</span>
-                    </div>
-                    <div class="flex justify-between text-xs text-silver">
-                        <span>Envío estándar</span>
-                        <span id="cart-shipping" class="text-gold-bright font-medium">$99 MXN</span>
-                    </div>
-                    <div class="flex justify-between text-base font-bold text-white pt-2.5 border-t border-white/10">
-                        <span>Total</span>
-                        <span id="cart-total" class="gold-text-metallic text-lg">$0 MXN</span>
-                    </div>
-                    <button onclick="goToCheckoutStep()" class="w-full py-3.5 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-gold-bright font-semibold uppercase tracking-[0.15em] text-xs transition-all mt-2">
-                        Continuar al Pago <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Paso 2: Datos del Cliente (Teléfono obligatorio) y Mercado Pago -->
-            <div id="cart-step-checkout" class="hidden flex-1 flex flex-col overflow-hidden">
-                <div class="flex-1 overflow-y-auto p-5 space-y-5">
-                    <button onclick="backToCartStep()" class="text-xs text-gold-bright hover:underline flex items-center gap-1.5 font-medium">
-                        <i class="fa-solid fa-arrow-left"></i> Volver al carrito
-                    </button>
-
-                    <form id="checkout-form" onsubmit="processCardOrder(event)" class="space-y-5">
-                        <div class="p-4 rounded-xl bg-pureBlack luxury-border space-y-3.5">
-                            <h4 class="text-xs font-semibold uppercase tracking-[0.16em] text-gold-bright">
-                                1. Datos de Contacto y Envío
-                            </h4>
-                            <div>
-                                <label class="block text-xs text-silver mb-1">Nombre Completo *</label>
-                                <input type="text" id="chk-name" required placeholder="Ej. Alejandro Ramírez" class="w-full px-3.5 py-2.5 rounded-lg bg-obsidian border border-white/15 focus:border-gold text-white text-sm outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gold-bright font-medium mb-1">
-                                    Tu Número de WhatsApp / Celular (10 dígitos) *
-                                </label>
-                                <input type="tel" id="chk-phone" required placeholder="Ej. 3312345678" oninput="validateCheckoutPhone(this)" class="w-full px-3.5 py-2.5 rounded-lg bg-obsidian luxury-border focus:border-gold-bright text-white text-sm outline-none">
-                                <p id="chk-phone-hint" class="text-[11px] text-silver mt-1">Obligatorio para enviarte confirmación y número de guía.</p>
-                            </div>
-                            <div>
-                                <label class="block text-xs text-silver mb-1">Dirección completa de entrega *</label>
-                                <textarea id="chk-address" rows="2" required placeholder="Calle, Número, Colonia, Ciudad, Estado y CP" class="w-full px-3.5 py-2 rounded-lg bg-obsidian border border-white/15 focus:border-gold text-white text-sm outline-none"></textarea>
-                            </div>
-                            <div>
-                                <label class="block text-xs text-silver mb-1">Notas adicionales (opcional)</label>
-                                <input type="text" id="chk-notes" placeholder="Referencias de entrega" class="w-full px-3.5 py-2 rounded-lg bg-obsidian border border-white/15 focus:border-gold text-white text-sm outline-none">
-                            </div>
-                        </div>
-
-                        <div class="p-4 rounded-xl bg-pureBlack luxury-border space-y-3">
-                            <div class="flex items-center justify-between">
-                                <h4 class="text-xs font-semibold uppercase tracking-[0.16em] text-gold-bright">
-                                    2. Pago con Tarjeta
-                                </h4>
-                                <div class="flex items-center gap-2 text-base text-silver">
-                                    <i class="fa-brands fa-cc-visa text-white"></i>
-                                    <i class="fa-brands fa-cc-mastercard text-gold-bright"></i>
-                                    <i class="fa-brands fa-cc-amex text-white"></i>
-                                </div>
-                            </div>
-                            <p class="text-xs text-silver leading-relaxed">
-                                Al confirmar tu pedido accederás al enlace oficial de <strong class="text-white">Mercado Pago</strong>, donde tu banco verifica la autenticidad y fondos de tu tarjeta con cifrado SSL.
-                            </p>
-                        </div>
-
-                        <button type="submit" id="pay-submit-btn" class="w-full py-4 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-gold-bright font-bold uppercase tracking-[0.15em] text-xs transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-lock"></i>
-                            <span>Confirmar Pedido • <span id="checkout-btn-total">$0 MXN</span></span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Paso 3: Confirmación, Pago en Mercado Pago y Notificación a WhatsApp -->
-            <div id="cart-step-success" class="hidden flex-1 overflow-y-auto p-6 space-y-5">
-                <div class="text-center space-y-2 pt-1">
-                    <div class="w-12 h-12 rounded-full bg-pureBlack luxury-border text-gold-bright flex items-center justify-center mx-auto text-lg">
-                        <i class="fa-solid fa-check"></i>
-                    </div>
-                    <h3 class="font-display text-2xl font-bold text-white uppercase tracking-wide">Pedido Registrado</h3>
-                    <p class="text-xs text-silver">
-                        Folio <strong id="success-order-id" class="text-gold-bright">#DX-0000</strong> guardado con tu teléfono de contacto.
-                    </p>
-                </div>
-
-                <div id="success-receipt-box" class="p-4 rounded-xl bg-pureBlack luxury-border space-y-2 text-xs"></div>
-
-                <!-- Paso 1: Pagar con Tarjeta en Mercado Pago -->
-                <div class="p-4 rounded-xl bg-pureBlack border border-white/10 space-y-2.5 text-center">
-                    <p class="text-[11px] text-silver uppercase tracking-wider">
-                        <span class="text-gold-bright font-bold">Paso 1:</span> Completa tu pago con tarjeta
-                    </p>
-                    <a id="mp-pay-now-btn" href="#" target="_blank"
-                        class="w-full py-3.5 px-4 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-white font-semibold text-xs uppercase tracking-[0.14em] flex items-center justify-center gap-2 transition-all">
-                        <i class="fa-solid fa-credit-card text-gold-bright"></i>
-                        <span>Pagar con Tarjeta en Mercado Pago</span>
-                    </a>
-                    <p id="mp-missing-warning" class="hidden text-[11px] text-silver">
-                        * El enlace de pago aún no ha sido configurado por el dueño. Confirma tu pedido directamente por WhatsApp abajo.
-                    </p>
-                </div>
-
-                <!-- Paso 2: Notificar al WhatsApp de Dxnzz Store -->
-                <div class="p-4 rounded-xl bg-pureBlack border border-white/10 space-y-2.5 text-center">
-                    <p class="text-[11px] text-silver uppercase tracking-wider">
-                        <span class="text-gold-bright font-bold">Paso 2:</span> Envía tu pedido a Dxnzz Store
-                    </p>
-                    <a id="whatsapp-notify-owner-btn" href="#" target="_blank"
-                        class="w-full py-3.5 px-4 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-gold-bright font-semibold text-xs uppercase tracking-[0.14em] flex items-center justify-center gap-2 transition-all">
-                        <i class="fa-brands fa-whatsapp text-base"></i>
-                        <span>Notificar por WhatsApp</span>
-                    </a>
-                </div>
-
-                <button onclick="resetAfterOrder()" class="w-full py-3 rounded-xl bg-pureBlack border border-white/10 hover:border-white/25 text-silver hover:text-white text-xs uppercase tracking-wider">
-                    Volver a la tienda
-                </button>
-            </div>
-        </aside>
+  <!-- Footer -->
+  <footer class="border-t border-white/10 bg-black py-8 px-4">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+      <div>
+        <span class="font-display text-white tracking-[0.18em]">DXNZZ STORE</span>
+        <span class="mx-2 text-neutral-700">|</span>
+        <span>Todos los derechos reservados</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a id="footer-wa-contact" href="#" target="_blank" class="hover:text-gold transition">Contacto WhatsApp</a>
+        <button id="footer-login-link" onclick="openLoginModal()" class="hover:text-white transition">Acceso Administrador</button>
+      </div>
     </div>
+  </footer>
 
-    <!-- ==================== MODAL PANEL DEL DUEÑO ==================== -->
-    <div id="admin-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6">
-        <div onclick="closeAdminModal()" class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
-
-        <div class="relative w-full max-w-5xl max-h-[92vh] bg-obsidian luxury-border rounded-2xl shadow-2xl flex flex-col overflow-hidden">
-            <!-- Header Modal -->
-            <div class="p-4 sm:p-5 bg-pureBlack border-b border-white/10 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-obsidian luxury-border text-gold-bright flex items-center justify-center">
-                        <i class="fa-solid fa-crown"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-display text-lg sm:text-xl font-bold uppercase text-white tracking-wide">Panel del Dueño — Dxnzz Store</h3>
-                        <p class="text-xs text-silver">Sube tus gorras con foto y precio, revisa pedidos y configura Mercado Pago</p>
-                    </div>
-                </div>
-                <button onclick="closeAdminModal()" class="w-9 h-9 rounded-xl bg-obsidian hover:bg-carbonHover border border-white/10 text-silver hover:text-white flex items-center justify-center">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Pestañas -->
-            <div class="flex border-b border-white/10 bg-pureBlack px-4 pt-2 gap-2 overflow-x-auto">
-                <button onclick="switchAdminTab('products')" id="tab-btn-products" class="admin-tab-btn px-4 py-2.5 rounded-t-xl text-xs font-semibold uppercase tracking-wider border-b-2 border-gold-bright text-gold-bright bg-obsidian whitespace-nowrap">
-                    Subir Gorra
-                </button>
-                <button onclick="switchAdminTab('orders')" id="tab-btn-orders" class="admin-tab-btn px-4 py-2.5 rounded-t-xl text-xs font-semibold uppercase tracking-wider border-b-2 border-transparent text-silver hover:text-white whitespace-nowrap flex items-center gap-2">
-                    <span>Pedidos Recibidos</span>
-                    <span id="admin-tab-orders-count" class="bg-pureBlack luxury-border text-gold-bright text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
-                </button>
-                <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="admin-tab-btn px-4 py-2.5 rounded-t-xl text-xs font-semibold uppercase tracking-wider border-b-2 border-transparent text-silver hover:text-white whitespace-nowrap">
-                    Mercado Pago y WhatsApp
-                </button>
-            </div>
-
-            <!-- Contenido de Pestañas -->
-            <div class="flex-1 overflow-y-auto p-4 sm:p-6">
-
-                <!-- TAB 1: SUBIR Y GESTIONAR GORRAS -->
-                <div id="admin-tab-products" class="space-y-8">
-                    <div class="p-5 rounded-2xl bg-pureBlack luxury-border">
-                        <div class="flex items-center justify-between mb-4">
-                            <h4 id="product-form-title" class="font-display text-base sm:text-lg font-bold uppercase text-gold-bright tracking-wide">
-                                Subir Nueva Gorra
-                            </h4>
-                            <button type="button" id="cancel-edit-btn" onclick="resetProductForm()" class="hidden text-xs text-silver hover:text-white underline">
-                                Cancelar edición
-                            </button>
-                        </div>
-
-                        <form id="admin-product-form" onsubmit="saveProduct(event)" class="grid grid-cols-1 md:grid-cols-12 gap-5">
-                            <input type="hidden" id="prod-edit-id">
-
-                            <!-- Foto del producto -->
-                            <div class="md:col-span-4 space-y-3">
-                                <div class="aspect-square rounded-xl bg-obsidian border border-dashed border-gold/40 overflow-hidden flex items-center justify-center">
-                                    <img id="prod-preview-img" src="https://placehold.co/600x600/080808/C5A059?text=FOTO+GORRA" alt="Vista previa" class="w-full h-full object-cover">
-                                </div>
-
-                                <label class="w-full py-2.5 px-3 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-gold-bright text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all">
-                                    <i class="fa-solid fa-camera"></i>
-                                    <span>Seleccionar Foto</span>
-                                    <input type="file" id="prod-file-input" accept="image/*" onchange="handleImageUpload(event)" class="hidden">
-                                </label>
-
-                                <input type="url" id="prod-url-input" oninput="handleImageUrlInput(this.value)" placeholder="O pega enlace (URL) de imagen..." class="w-full px-3 py-2 rounded-lg bg-obsidian border border-white/15 focus:border-gold text-white text-xs outline-none">
-                            </div>
-
-                            <!-- Datos del producto -->
-                            <div class="md:col-span-8 space-y-4">
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-[11px] text-silver uppercase tracking-wider mb-1">Nombre de la Gorra *</label>
-                                        <input type="text" id="prod-name" required placeholder="Ej. Dxnzz Edición Negra" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 focus:border-gold text-white text-sm outline-none">
-                                    </div>
-                                    <div>
-                                        <label class="block text-[11px] text-gold-bright font-semibold uppercase tracking-wider mb-1">Precio (MXN) *</label>
-                                        <input type="number" id="prod-price" required min="1" step="1" placeholder="Ej. 650" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian luxury-border focus:border-gold-bright text-white text-sm font-bold outline-none">
-                                    </div>
-                                </div>
-
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-[11px] text-silver uppercase tracking-wider mb-1">Piezas Disponibles (Stock) *</label>
-                                        <input type="number" id="prod-stock" required min="0" value="10" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 focus:border-gold text-white text-sm outline-none">
-                                    </div>
-                                    <div>
-                                        <label class="block text-[11px] text-silver uppercase tracking-wider mb-1">Descripción (Opcional)</label>
-                                        <input type="text" id="prod-desc" placeholder="Ej. Bordado en relieve, visera curva" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 focus:border-gold text-white text-sm outline-none">
-                                    </div>
-                                </div>
-
-                                <div class="pt-2 flex justify-end">
-                                    <button type="submit" id="save-product-btn" class="px-6 py-3 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-gold-bright font-semibold uppercase tracking-[0.14em] text-xs transition-all">
-                                        <i class="fa-solid fa-check mr-2"></i>Publicar en Tienda
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Lista de gorras publicadas -->
-                    <div>
-                        <h4 class="font-display text-base font-bold uppercase text-white tracking-wider mb-4">Gorras Publicadas en Tienda</h4>
-                        <div id="admin-products-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-                    </div>
-                </div>
-
-                <!-- TAB 2: PEDIDOS RECIBIDOS -->
-                <div id="admin-tab-orders" class="hidden space-y-5">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-pureBlack p-4 rounded-xl luxury-border">
-                        <div>
-                            <h4 class="font-display text-base font-bold uppercase text-gold-bright tracking-wide">Pedidos y Teléfonos de Clientes</h4>
-                            <p class="text-xs text-silver">Aquí aparece el número de cada cliente para llamarlo o mandarle WhatsApp directo.</p>
-                        </div>
-                        <button onclick="simulateIncomingOrder()" class="px-4 py-2 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border text-gold-bright text-xs font-semibold uppercase tracking-wider shrink-0">
-                            Probar Alerta
-                        </button>
-                    </div>
-
-                    <div id="admin-orders-list" class="space-y-4"></div>
-                </div>
-
-                <!-- TAB 3: MERCADO PAGO, WHATSAPP Y GESTIÓN DE RESEÑAS -->
-                <div id="admin-tab-settings" class="hidden max-w-3xl space-y-6">
-                    <!-- Información clara sobre pagos y alertas -->
-                    <div class="p-5 rounded-2xl bg-pureBlack luxury-border space-y-3">
-                        <h4 class="font-display text-base font-bold uppercase text-gold-bright tracking-wide">
-                            Funcionamiento de Pagos con Tarjeta y Notificaciones
-                        </h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                            <div class="p-3.5 rounded-xl bg-obsidian border border-white/10 space-y-1">
-                                <p class="text-white font-semibold">1. Validación Bancaria</p>
-                                <p class="text-silver leading-relaxed">
-                                    Mercado Pago verifica en segundos con el banco emisor que la tarjeta sea real y tenga saldo suficiente.
-                                </p>
-                            </div>
-                            <div class="p-3.5 rounded-xl bg-obsidian border border-white/10 space-y-1">
-                                <p class="text-white font-semibold">2. Tu Dinero</p>
-                                <p class="text-silver leading-relaxed">
-                                    El pago entra a tu cuenta de Mercado Pago y puedes transferirlo cuando quieras a tu cuenta bancaria (CLABE).
-                                </p>
-                            </div>
-                            <div class="p-3.5 rounded-xl bg-obsidian border border-white/10 space-y-1">
-                                <p class="text-white font-semibold">3. Aviso a tu Celular</p>
-                                <p class="text-silver leading-relaxed">
-                                    La app de Mercado Pago te manda notificación push al instante y aquí recibes el teléfono del cliente para WhatsApp.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Formulario WhatsApp y Mercado Pago -->
-                    <div class="p-5 rounded-2xl bg-pureBlack luxury-border space-y-4">
-                        <h4 class="font-display text-base font-bold uppercase text-white tracking-wide">
-                            Configurar WhatsApp y Mercado Pago
-                        </h4>
-                        <form onsubmit="saveStoreSettings(event)" class="space-y-4">
-                            <div>
-                                <label class="block text-xs text-silver uppercase tracking-wider mb-1">
-                                    Tu Número de WhatsApp (ej. 521 + 10 dígitos) *
-                                </label>
-                                <input type="text" id="set-owner-whatsapp" required placeholder="Ej. 5213312345678" class="w-full px-4 py-3 rounded-xl bg-obsidian luxury-border focus:border-gold-bright text-white text-sm font-mono outline-none">
-                            </div>
-
-                            <div>
-                                <label class="block text-xs text-silver uppercase tracking-wider mb-1">
-                                    Tu Link de Cobro de Mercado Pago
-                                </label>
-                                <input type="url" id="set-payment-link" placeholder="https://link.mercadopago.com.mx/dxnzzstore" class="w-full px-4 py-3 rounded-xl bg-obsidian border border-white/15 focus:border-gold text-white text-sm outline-none">
-                            </div>
-
-                            <div>
-                                <label class="block text-xs text-silver uppercase tracking-wider mb-1">
-                                    Mensaje de Confirmación al Cliente
-                                </label>
-                                <textarea id="set-custom-message" rows="2" class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-white/15 focus:border-gold text-white text-sm outline-none"></textarea>
-                            </div>
-
-                            <button type="submit" class="px-6 py-3 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-gold-bright font-semibold uppercase tracking-[0.14em] text-xs transition-all">
-                                Guardar Configuración
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Moderar Reseñas -->
-                    <div class="p-5 rounded-2xl bg-pureBlack border border-white/10 space-y-3">
-                        <h4 class="font-display text-base font-bold uppercase text-white tracking-wide">
-                            Reseñas Publicadas
-                        </h4>
-                        <div id="admin-reviews-list" class="space-y-2.5"></div>
-                    </div>
-                </div>
-
-            </div>
+  <!-- MODAL: Iniciar Sesión Dueño -->
+  <div id="login-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#080808] border border-gold/40 rounded-lg max-w-sm w-full p-6">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-5">
+        <div>
+          <span class="text-[10px] uppercase tracking-[0.25em] text-gold block">Área Privada</span>
+          <h3 class="font-display text-base tracking-wider text-white mt-0.5">INICIAR SESIÓN</h3>
         </div>
+        <button onclick="closeLoginModal()" class="text-neutral-500 hover:text-white text-sm">✕</button>
+      </div>
+
+      <form onsubmit="handleOwnerLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Correo de Administrador</label>
+          <input id="login-email" type="email" required placeholder="admin@dxnzzstore.com" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Contraseña</label>
+          <input id="login-password" type="password" required placeholder="••••••••" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+        </div>
+        <p id="login-error" class="hidden text-xs text-red-400">Correo o contraseña incorrectos.</p>
+        <button type="submit" class="w-full bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest py-2.5 rounded transition">
+          Entrar al Panel
+        </button>
+      </form>
+      <p class="text-[10px] text-neutral-500 mt-4 text-center">
+        Acceso predeterminado: <span class="text-neutral-300">admin@dxnzzstore.com</span> / <span class="text-neutral-300">dxnzz2026</span>
+      </p>
     </div>
+  </div>
 
-    <!-- ==================== ALERTA INSTANTÁNEA DE NUEVO PEDIDO ==================== -->
-    <div id="live-sale-toast" class="fixed bottom-4 right-4 z-50 hidden max-w-sm w-full bg-pureBlack luxury-border rounded-2xl p-4 shadow-2xl animate-toast">
-        <div class="flex items-start justify-between gap-3">
-            <div class="flex items-center gap-2.5">
-                <span class="w-9 h-9 rounded-xl bg-obsidian luxury-border text-gold-bright flex items-center justify-center">
-                    <i class="fa-solid fa-bell"></i>
-                </span>
-                <div>
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-gold-bright">Nuevo Pedido</span>
-                    <h4 id="toast-buyer-name" class="text-sm font-bold text-white">Cliente</h4>
-                </div>
+  <!-- MODAL: Panel del Dueño (Solo accesible tras iniciar sesión) -->
+  <div id="owner-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+    <div class="bg-[#080808] border border-gold/40 rounded-lg max-w-3xl w-full p-5 sm:p-6 my-auto max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
+        <div>
+          <span class="text-[10px] uppercase tracking-[0.25em] text-gold block">Administración</span>
+          <h3 class="font-display text-lg tracking-wider text-white">PANEL DXNZZ STORE</h3>
+        </div>
+        <button onclick="closeOwnerPanel()" class="text-neutral-400 hover:text-white text-sm px-2 py-1">✕</button>
+      </div>
+
+      <!-- Navegación de Pestañas del Dueño -->
+      <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4 mb-6">
+        <button id="tab-btn-products" onclick="switchOwnerTab('products')" class="text-xs px-4 py-2 rounded border border-gold bg-gold text-black font-semibold transition">
+          Productos y Precios
+        </button>
+        <button id="tab-btn-orders" onclick="switchOwnerTab('orders')" class="text-xs px-4 py-2 rounded border border-white/15 text-neutral-300 hover:border-gold transition">
+          Pedidos Recibidos (<span id="tab-orders-count">0</span>)
+        </button>
+        <button id="tab-btn-settings" onclick="switchOwnerTab('settings')" class="text-xs px-4 py-2 rounded border border-white/15 text-neutral-300 hover:border-gold transition">
+          Pagos, WhatsApp y Cuenta
+        </button>
+      </div>
+
+      <!-- TAB 1: Productos -->
+      <div id="owner-tab-products" class="space-y-6">
+        <form onsubmit="saveProduct(event)" class="bg-black border border-white/10 rounded-lg p-4 space-y-4">
+          <div class="flex items-center justify-between">
+            <h4 id="product-form-title" class="text-xs uppercase tracking-widest text-gold font-semibold">Agregar Nueva Gorra</h4>
+            <button type="button" id="cancel-edit-btn" onclick="resetProductForm()" class="hidden text-[11px] text-neutral-400 hover:text-white underline">Cancelar edición</button>
+          </div>
+          <input type="hidden" id="edit-product-id" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] text-neutral-400 mb-1">Nombre de la Gorra *</label>
+              <input id="prod-name" type="text" required placeholder="Ej. Dxnzz Black Gold Edition" class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
             </div>
-            <button onclick="dismissSaleToast()" class="text-silver hover:text-white text-sm">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-neutral-400 mb-1">Precio (MXN) *</label>
+                <input id="prod-price" type="number" min="1" step="1" required placeholder="650" class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+              </div>
+              <div>
+                <label class="block text-[11px] text-neutral-400 mb-1">Stock disponible *</label>
+                <input id="prod-stock" type="number" min="0" step="1" required value="10" class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] text-neutral-400 mb-1">Descripción breve</label>
+            <input id="prod-desc" type="text" placeholder="Ej. Acabado negro mate con bordado dorado metálico." class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+            <div>
+              <label class="block text-[11px] text-neutral-400 mb-1">Subir Foto desde tu dispositivo *</label>
+              <input id="prod-image-file" type="file" accept="image/*" onchange="previewUploadedImage(event)" class="w-full text-xs text-neutral-400 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border file:border-gold/50 file:text-xs file:bg-black file:text-gold hover:file:bg-gold hover:file:text-black cursor-pointer" />
+            </div>
+            <div>
+              <label class="block text-[11px] text-neutral-400 mb-1">O pegar enlace de imagen (opcional)</label>
+              <input id="prod-image-url" type="url" placeholder="https://..." oninput="previewUrlImage(this.value)" class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+            </div>
+          </div>
+
+          <div id="image-preview-wrapper" class="hidden flex items-center gap-3 pt-1">
+            <img id="image-preview" src="" alt="Vista previa" class="w-16 h-16 object-cover rounded border border-gold/40 bg-black" />
+            <span class="text-[11px] text-neutral-400">Vista previa de la foto</span>
+          </div>
+
+          <button type="submit" class="bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest px-5 py-2.5 rounded transition">
+            Guardar Producto
+          </button>
+        </form>
+
+        <!-- Lista de Productos Publicados -->
+        <div>
+          <h4 class="text-xs uppercase tracking-widest text-neutral-400 mb-3">Gorras Publicadas</h4>
+          <div id="owner-products-list" class="space-y-2.5"></div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Pedidos Recibidos -->
+      <div id="owner-tab-orders" class="hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <p class="text-xs text-neutral-400">Aquí aparecen los pedidos con el número de teléfono del cliente para contactarlo al instante.</p>
+          <button onclick="clearAllOrders()" class="text-[11px] text-neutral-500 hover:text-red-400 transition">Limpiar historial</button>
+        </div>
+        <div id="owner-orders-list" class="space-y-3"></div>
+      </div>
+
+      <!-- TAB 3: Configuración Pagos, WhatsApp y Cuenta -->
+      <div id="owner-tab-settings" class="hidden space-y-6">
+        <form onsubmit="saveOwnerSettings(event)" class="space-y-5">
+          <div class="bg-black border border-white/10 rounded-lg p-4 space-y-4">
+            <h4 class="text-xs uppercase tracking-widest text-gold font-semibold">Notificaciones WhatsApp y Cobro con Tarjeta</h4>
+            <div>
+              <label class="block text-[11px] text-neutral-400 mb-1">Tu Número de WhatsApp (con código de país, ej. 5213312345678)</label>
+              <input id="set-wa-number" type="tel" placeholder="5213312345678" class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] text-neutral-400 mb-1">Enlace de Pago con Tarjeta (Mercado Pago / Stripe)</label>
+              <input id="set-payment-link" type="url" placeholder="https://link.mercadopago.com.mx/tu-enlace" class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+              <p class="text-[11px] text-neutral-500 mt-1.5 leading-relaxed">
+                Cuando el cliente pague en tu enlace de Mercado Pago o Stripe, la plataforma verifica fondos reales con el banco, deposita el dinero en tu cuenta y envía una notificación push directa a tu celular.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-black border border-white/10 rounded-lg p-4 space-y-4">
+            <h4 class="text-xs uppercase tracking-widest text-gold font-semibold">Credenciales de Acceso del Dueño</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] text-neutral-400 mb-1">Correo de Administrador</label>
+                <input id="set-admin-email" type="email" required class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+              </div>
+              <div>
+                <label class="block text-[11px] text-neutral-400 mb-1">Nueva Contraseña</label>
+                <input id="set-admin-pass" type="text" required class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest px-6 py-2.5 rounded transition">
+            Guardar Configuración
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Bolsa de Compras y Checkout -->
+  <div id="cart-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex justify-end">
+    <div class="bg-[#080808] border-l border-white/15 w-full max-w-md h-full flex flex-col justify-between p-5 sm:p-6 overflow-y-auto">
+      <div>
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <div>
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold block">Dxnzz Store</span>
+            <h3 class="font-display text-base tracking-wider text-white">TU BOLSA</h3>
+          </div>
+          <button onclick="closeCartModal()" class="text-neutral-400 hover:text-white text-sm">✕</button>
         </div>
 
-        <div class="mt-3 p-3 rounded-xl bg-obsidian border border-white/10 text-xs space-y-1">
-            <p class="text-silver">Folio: <strong id="toast-order-id" class="text-gold-bright">#DX-0000</strong> • Total: <strong id="toast-total" class="text-white">$0 MXN</strong></p>
-            <p class="text-white flex items-center gap-1.5">
-                <i class="fa-solid fa-phone text-gold"></i>
-                <span>Tel. Cliente: <strong id="toast-buyer-phone" class="select-all">3300000000</strong></span>
-            </p>
+        <!-- Lista de items -->
+        <div id="cart-items-container" class="divide-y divide-white/10 my-4 max-h-60 overflow-y-auto"></div>
+
+        <!-- Formulario de Cliente y Pago -->
+        <div id="checkout-form-section" class="hidden border-t border-white/10 pt-4 space-y-3.5">
+          <h4 class="text-xs uppercase tracking-widest text-gold font-semibold">Datos para Entrega y Contacto</h4>
+          <div>
+            <label class="block text-[11px] text-neutral-400 mb-1">Nombre completo *</label>
+            <input id="cust-name" type="text" required placeholder="Ej. Carlos Mendoza" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+          </div>
+          <div>
+            <label class="block text-[11px] text-neutral-400 mb-1">Tu número de WhatsApp / Celular (10 dígitos) *</label>
+            <input id="cust-phone" type="tel" required placeholder="Ej. 3312345678" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+          </div>
+          <div>
+            <label class="block text-[11px] text-neutral-400 mb-1">Ciudad / Dirección de envío *</label>
+            <input id="cust-address" type="text" required placeholder="Calle, colonia, ciudad" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+          </div>
+          <div>
+            <label class="block text-[11px] text-neutral-400 mb-1">Método de pago</label>
+            <select id="cust-payment-method" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none">
+              <option value="Tarjeta en línea (Mercado Pago / Stripe)">Tarjeta de Crédito o Débito en línea</option>
+              <option value="Transferencia / Depósito">Transferencia bancaria / Depósito</option>
+            </select>
+          </div>
         </div>
 
-        <div class="mt-3 flex items-center gap-2">
-            <a id="toast-whatsapp-client-btn" href="#" target="_blank"
-                class="flex-1 py-2 px-3 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border text-gold-bright font-semibold text-xs text-center flex items-center justify-center gap-1.5">
-                <i class="fa-brands fa-whatsapp"></i> WhatsApp Cliente
+        <!-- Confirmación de Pedido Realizado -->
+        <div id="order-success-box" class="hidden border border-gold/50 bg-black rounded-lg p-4 mt-4 space-y-3">
+          <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-semibold block">Pedido Registrado</span>
+          <p class="text-xs text-neutral-300 leading-relaxed">
+            Tu pedido quedó registrado con tu número de contacto. Completa el pago con tarjeta o envía el comprobante directo por WhatsApp para confirmar tu envío.
+          </p>
+          <div class="space-y-2 pt-1">
+            <a id="checkout-pay-card-btn" href="#" target="_blank" class="block w-full text-center bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-wider py-2.5 rounded transition">
+              Pagar con Tarjeta en Línea
             </a>
-            <button onclick="openAdminModal('orders'); dismissSaleToast();"
-                class="py-2 px-3 rounded-xl bg-obsidian border border-white/15 text-white font-medium text-xs">
-                Ver Pedido
-            </button>
+            <a id="checkout-send-wa-btn" href="#" target="_blank" class="block w-full text-center border border-white/20 hover:border-gold text-white text-xs font-medium py-2.5 rounded transition">
+              Notificar Pedido por WhatsApp
+            </a>
+          </div>
         </div>
+      </div>
+
+      <!-- Total y Botón Finalizar -->
+      <div id="cart-footer" class="border-t border-white/10 pt-4 mt-4">
+        <div class="flex items-center justify-between text-sm mb-4">
+          <span class="text-neutral-400">Total a pagar</span>
+          <span id="cart-total" class="font-semibold text-white text-base">$0 MXN</span>
+        </div>
+        <button id="submit-order-btn" onclick="submitCustomerOrder()" class="w-full bg-white hover:bg-gold text-black font-semibold text-xs uppercase tracking-widest py-3 rounded transition">
+          Confirmar Pedido
+        </button>
+      </div>
     </div>
+  </div>
 
-    <!-- ==================== NOTIFICACIÓN FLOTANTE DISCRETA ==================== -->
-    <div id="feedback-pill" class="fixed top-24 left-1/2 -translate-x-1/2 z-50 hidden px-5 py-2.5 rounded-full bg-pureBlack luxury-border text-white text-xs font-medium tracking-wide shadow-2xl flex items-center gap-2">
-        <i class="fa-solid fa-check text-gold-bright"></i>
-        <span id="feedback-pill-text">Listo</span>
+  <!-- MODAL: Escribir Reseña -->
+  <div id="review-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#080808] border border-white/15 rounded-lg max-w-sm w-full p-6">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+        <h3 class="font-display text-sm tracking-wider text-white">NUEVA RESEÑA</h3>
+        <button onclick="closeReviewModal()" class="text-neutral-500 hover:text-white text-sm">✕</button>
+      </div>
+      <form onsubmit="submitReview(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-[11px] text-neutral-400 mb-1">Tu nombre *</label>
+          <input id="rev-author" type="text" required placeholder="Ej. Alejandro R." class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] text-neutral-400 mb-1">Gorra adquirida *</label>
+          <input id="rev-product" type="text" required placeholder="Ej. Dxnzz Black Edition" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] text-neutral-400 mb-1">Tu comentario *</label>
+          <textarea id="rev-comment" rows="3" required placeholder="Excelente calidad y entrega rápida..." class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest py-2.5 rounded transition">
+          Publicar Reseña
+        </button>
+      </form>
     </div>
+  </div>
 
-    <!-- ==================== JAVASCRIPT ==================== -->
-    <script>
-        // IDs de productos de demostración anteriores para limpiarlos si quedaron en el navegador
-        const LEGACY_DEMO_IDS = ['dx-101', 'dx-102', 'dx-103', 'dx-104'];
+  <script>
+    // Estado en LocalStorage
+    const STORAGE_KEYS = {
+      PRODUCTS: 'dxnzz_store_products_v2',
+      ORDERS: 'dxnzz_store_orders_v2',
+      REVIEWS: 'dxnzz_store_reviews_v2',
+      SETTINGS: 'dxnzz_store_settings_v2',
+      SESSION: 'dxnzz_store_owner_session_v2'
+    };
 
-        let products = [];
-        let cart = [];
-        let orders = [];
-        let reviews = [];
-        let settings = {
-            ownerWhatsapp: '5213300000000',
-            paymentLink: '',
-            customMessage: 'Gracias por tu compra en Dxnzz Store. En cuanto validemos tu pago te enviaremos tu guía.'
-        };
-        let uploadedImageBase64 = '';
+    const DEFAULT_SETTINGS = {
+      waNumber: '5213300000000',
+      paymentLink: 'https://link.mercadopago.com.mx/',
+      adminEmail: 'admin@dxnzzstore.com',
+      adminPass: 'dxnzz2026'
+    };
 
-        window.onload = function () {
-            loadStateFromStorage();
-            renderProducts();
-            renderCart();
-            renderReviews();
-            updateOrderBadges();
-            syncSettingsUI();
-        };
+    let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
+    let orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || [];
+    let reviews = JSON.parse(localStorage.getItem(STORAGE_KEYS.REVIEWS)) || [];
+    let settings = { ...DEFAULT_SETTINGS, ...(JSON.parse(localStorage.getItem(STORAGE_KEYS.SETTINGS)) || {}) };
+    let isOwnerLoggedIn = sessionStorage.getItem(STORAGE_KEYS.SESSION) === 'true';
+    let cart = [];
+    let uploadedBase64Image = '';
 
-        function loadStateFromStorage() {
-            try {
-                // Cargar productos sin precargar paquetes de ejemplo y filtrando los antiguos de demostración
-                const savedProducts = localStorage.getItem('dxnzz_products');
-                if (savedProducts) {
-                    const parsed = JSON.parse(savedProducts);
-                    products = Array.isArray(parsed)
-                        ? parsed.filter(p => p && !LEGACY_DEMO_IDS.includes(p.id))
-                        : [];
-                    localStorage.setItem('dxnzz_products', JSON.stringify(products));
-                } else {
-                    products = [];
-                }
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', () => {
+      updateAuthUI();
+      renderProducts();
+      renderReviews();
+      renderCart();
+      updateFooterLinks();
+    });
 
-                const savedCart = localStorage.getItem('dxnzz_cart');
-                cart = savedCart ? JSON.parse(savedCart) : [];
+    // Control de Sesión del Dueño
+    function updateAuthUI() {
+      const loginBtn = document.getElementById('btn-login-open');
+      const ownerControls = document.getElementById('owner-header-controls');
+      const emptyAddBtn = document.getElementById('owner-empty-add-btn');
+      const footerLoginLink = document.getElementById('footer-login-link');
 
-                const savedOrders = localStorage.getItem('dxnzz_orders');
-                orders = savedOrders ? JSON.parse(savedOrders) : [];
+      if (isOwnerLoggedIn) {
+        loginBtn.classList.add('hidden');
+        ownerControls.classList.remove('hidden');
+        if (emptyAddBtn) emptyAddBtn.classList.remove('hidden');
+        footerLoginLink.textContent = 'Panel Dueño';
+        footerLoginLink.onclick = () => openOwnerPanel('products');
+        updateOrdersBadge();
+      } else {
+        loginBtn.classList.remove('hidden');
+        ownerControls.classList.add('hidden');
+        if (emptyAddBtn) emptyAddBtn.classList.add('hidden');
+        footerLoginLink.textContent = 'Acceso Administrador';
+        footerLoginLink.onclick = openLoginModal;
+      }
+      renderReviews();
+    }
 
-                // Cargar reseñas limpias validando que no existan registros corruptos con undefined
-                const savedReviews = localStorage.getItem('dxnzz_reviews');
-                if (savedReviews) {
-                    const parsedReviews = JSON.parse(savedReviews);
-                    reviews = Array.isArray(parsedReviews)
-                        ? parsedReviews.filter(r => r && r.author && r.product && r.comment)
-                        : [];
-                    localStorage.setItem('dxnzz_reviews', JSON.stringify(reviews));
-                } else {
-                    reviews = [];
-                }
+    function openLoginModal() {
+      document.getElementById('login-error').classList.add('hidden');
+      document.getElementById('login-modal').classList.remove('hidden');
+    }
 
-                const savedSettings = localStorage.getItem('dxnzz_settings');
-                if (savedSettings) {
-                    settings = { ...settings, ...JSON.parse(savedSettings) };
-                }
-            } catch (e) {
-                console.error('Error cargando almacenamiento:', e);
-                products = [];
-                reviews = [];
-            }
+    function closeLoginModal() {
+      document.getElementById('login-modal').classList.add('hidden');
+    }
+
+    function handleOwnerLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim().toLowerCase();
+      const pass = document.getElementById('login-password').value;
+
+      if (email === settings.adminEmail.toLowerCase() && pass === settings.adminPass) {
+        isOwnerLoggedIn = true;
+        sessionStorage.setItem(STORAGE_KEYS.SESSION, 'true');
+        closeLoginModal();
+        updateAuthUI();
+        openOwnerPanel('products');
+      } else {
+        document.getElementById('login-error').classList.remove('hidden');
+      }
+    }
+
+    function logoutOwner() {
+      isOwnerLoggedIn = false;
+      sessionStorage.removeItem(STORAGE_KEYS.SESSION);
+      closeOwnerPanel();
+      updateAuthUI();
+    }
+
+    // Panel Dueño
+    function openOwnerPanel(tab = 'products') {
+      if (!isOwnerLoggedIn) {
+        openLoginModal();
+        return;
+      }
+      document.getElementById('owner-modal').classList.remove('hidden');
+      switchOwnerTab(tab);
+      loadSettingsForm();
+      renderOwnerProducts();
+      renderOwnerOrders();
+    }
+
+    function closeOwnerPanel() {
+      document.getElementById('owner-modal').classList.add('hidden');
+    }
+
+    function switchOwnerTab(tab) {
+      ['products', 'orders', 'settings'].forEach(t => {
+        document.getElementById(`owner-tab-${t}`).classList.add('hidden');
+        const btn = document.getElementById(`tab-btn-${t}`);
+        btn.classList.remove('border-gold', 'bg-gold', 'text-black', 'font-semibold');
+        btn.classList.add('border-white/15', 'text-neutral-300');
+      });
+      document.getElementById(`owner-tab-${tab}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-btn-${tab}`);
+      activeBtn.classList.remove('border-white/15', 'text-neutral-300');
+      activeBtn.classList.add('border-gold', 'bg-gold', 'text-black', 'font-semibold');
+    }
+
+    // Gestión de Productos
+    function previewUploadedImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        uploadedBase64Image = e.target.result;
+        document.getElementById('image-preview').src = uploadedBase64Image;
+        document.getElementById('image-preview-wrapper').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function previewUrlImage(url) {
+      if (url && url.startsWith('http')) {
+        uploadedBase64Image = url;
+        document.getElementById('image-preview').src = url;
+        document.getElementById('image-preview-wrapper').classList.remove('hidden');
+      }
+    }
+
+    function saveProduct(e) {
+      e.preventDefault();
+      if (!isOwnerLoggedIn) return;
+
+      const editId = document.getElementById('edit-product-id').value;
+      const name = document.getElementById('prod-name').value.trim();
+      const price = parseFloat(document.getElementById('prod-price').value);
+      const stock = parseInt(document.getElementById('prod-stock').value, 10);
+      const desc = document.getElementById('prod-desc').value.trim();
+      const urlInput = document.getElementById('prod-image-url').value.trim();
+      const finalImage = uploadedBase64Image || urlInput;
+
+      if (!finalImage) {
+        alert('Por favor sube una foto o ingresa un enlace de imagen para la gorra.');
+        return;
+      }
+
+      if (editId) {
+        const idx = products.findIndex(p => p.id === editId);
+        if (idx !== -1) {
+          products[idx] = { ...products[idx], name, price, stock, desc, image: finalImage };
         }
-
-        function saveProductsToStorage() {
-            try {
-                localStorage.setItem('dxnzz_products', JSON.stringify(products));
-            } catch (e) {
-                showPill('La imagen es muy pesada; intenta con una foto más ligera.');
-            }
-        }
-
-        function saveCartToStorage() {
-            localStorage.setItem('dxnzz_cart', JSON.stringify(cart));
-        }
-
-        function saveOrdersToStorage() {
-            localStorage.setItem('dxnzz_orders', JSON.stringify(orders));
-        }
-
-        function saveReviewsToStorage() {
-            localStorage.setItem('dxnzz_reviews', JSON.stringify(reviews));
-        }
-
-        // Sonido sutil de alerta
-        function playSaleChime() {
-            try {
-                if (typeof Tone !== 'undefined') {
-                    Tone.start();
-                    const synth = new Tone.PolySynth(Tone.Synth).toDestination();
-                    synth.volume.value = -10;
-                    const now = Tone.now();
-                    synth.triggerAttackRelease('E5', '16n', now);
-                    synth.triggerAttackRelease('B5', '8n', now + 0.12);
-                }
-            } catch (e) {}
-        }
-
-        // ==================== RENDERIZADO DE CATÁLOGO (LIMPIO) ====================
-        function renderProducts() {
-            const grid = document.getElementById('products-grid');
-
-            if (products.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full text-center py-20 px-6 bg-obsidian luxury-border rounded-2xl space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-pureBlack luxury-border text-gold-bright flex items-center justify-center mx-auto">
-                            <i class="fa-solid fa-crown"></i>
-                        </div>
-                        <div class="space-y-1.5">
-                            <h3 class="font-display text-xl sm:text-2xl font-bold uppercase text-white tracking-wide">
-                                Catálogo en preparación
-                            </h3>
-                            <p class="text-xs sm:text-sm text-silver max-w-md mx-auto">
-                                Próximamente nuevos modelos exclusivos de Dxnzz Store.
-                            </p>
-                        </div>
-                        <div class="pt-2">
-                            <button onclick="openAdminModal('products')" class="px-6 py-3 rounded-xl bg-pureBlack hover:bg-carbonHover luxury-border hover:border-gold-bright text-gold-bright font-semibold text-xs uppercase tracking-[0.16em] transition-all">
-                                Subir mi primera gorra
-                            </button>
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-
-            grid.innerHTML = products.map(prod => {
-                const outOfStock = Number(prod.stock) <= 0;
-                return `
-                <article class="product-card rounded-2xl overflow-hidden flex flex-col">
-                    <!-- Foto del producto -->
-                    <div class="relative aspect-square bg-pureBlack overflow-hidden">
-                        <img src="${prod.image}"
-                            alt="${prod.name}"
-                            onerror="this.src='https://placehold.co/600x600/080808/C5A059?text=DXNZZ+STORE'"
-                            class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105">
-                        <span class="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-pureBlack/85 backdrop-blur-sm border border-white/10 text-[10px] font-medium uppercase tracking-wider ${outOfStock ? 'text-red-400' : 'text-silver'}">
-                            ${outOfStock ? 'Agotado' : `Disponibles: ${prod.stock}`}
-                        </span>
-                    </div>
-
-                    <!-- Información y Precio -->
-                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-                        <div>
-                            <h3 class="font-display text-xl font-bold text-white uppercase tracking-wide">
-                                ${prod.name}
-                            </h3>
-                            ${prod.description ? `<p class="text-xs text-silver mt-1.5 line-clamp-2 leading-relaxed">${prod.description}</p>` : ''}
-                        </div>
-
-                        <div class="pt-3 border-t border-white/10 flex items-center justify-between gap-3">
-                            <div>
-                                <span class="text-[10px] text-silver uppercase tracking-wider block">Precio</span>
-                                <span class="text-lg font-bold text-gold-bright">$${Number(prod.price).toLocaleString('es-MX')} <span class="text-xs font-normal text-silver">MXN</span></span>
-                            </div>
-
-                            <button onclick="addToCart('${prod.id}')" ${outOfStock ? 'disabled' : ''}
-                                class="px-4 py-2.5 rounded-xl ${outOfStock ? 'bg-pureBlack border border-white/10 text-silver/40 cursor-not-allowed' : 'bg-pureBlack hover:bg-carbonHover luxury-border hover:border-gold-bright text-white hover:text-gold-bright'} font-semibold text-xs uppercase tracking-wider transition-all flex items-center gap-2">
-                                <i class="fa-solid fa-bag-shopping text-gold"></i>
-                                <span>${outOfStock ? 'Agotado' : 'Agregar'}</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-                `;
-            }).join('');
-        }
-
-        // ==================== LÓGICA DEL CARRITO ====================
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product || Number(product.stock) <= 0) return;
-
-            const existingIndex = cart.findIndex(item => item.productId === productId);
-            if (existingIndex > -1) {
-                if (cart[existingIndex].qty < Number(product.stock)) {
-                    cart[existingIndex].qty += 1;
-                } else {
-                    showPill('Has alcanzado el stock disponible de este modelo');
-                    return;
-                }
-            } else {
-                cart.push({
-                    productId: product.id,
-                    name: product.name,
-                    price: Number(product.price),
-                    image: product.image,
-                    qty: 1
-                });
-            }
-
-            saveCartToStorage();
-            renderCart();
-            showPill(`"${product.name}" agregada al carrito`);
-        }
-
-        function updateCartQty(index, delta) {
-            const item = cart[index];
-            if (!item) return;
-            const product = products.find(p => p.id === item.productId);
-            const maxStock = product ? Number(product.stock) : 99;
-
-            item.qty += delta;
-            if (item.qty <= 0) {
-                cart.splice(index, 1);
-            } else if (item.qty > maxStock) {
-                item.qty = maxStock;
-                showPill('Stock máximo alcanzado');
-            }
-            saveCartToStorage();
-            renderCart();
-        }
-
-        function removeCartItem(index) {
-            cart.splice(index, 1);
-            saveCartToStorage();
-            renderCart();
-        }
-
-        function calculateTotals() {
-            const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-            const shipping = subtotal === 0 ? 0 : (subtotal >= 1299 ? 0 : 99);
-            const total = subtotal + shipping;
-            return { subtotal, shipping, total };
-        }
-
-        function renderCart() {
-            const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
-            document.getElementById('cart-count-badge').textContent = totalCount;
-
-            const container = document.getElementById('cart-items-container');
-            const footer = document.getElementById('cart-footer');
-
-            if (cart.length === 0) {
-                footer.classList.add('hidden');
-                container.innerHTML = `
-                    <div class="h-full flex flex-col items-center justify-center text-center py-12 space-y-4">
-                        <div class="w-14 h-14 rounded-2xl bg-pureBlack luxury-border flex items-center justify-center text-gold text-xl">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                        </div>
-                        <div>
-                            <p class="text-white font-semibold text-sm">Tu carrito está vacío</p>
-                            <p class="text-xs text-silver mt-1">Selecciona una gorra del catálogo para continuar.</p>
-                        </div>
-                        <button onclick="toggleCartDrawer(false)" class="px-5 py-2.5 rounded-xl bg-pureBlack luxury-border text-gold-bright font-semibold text-xs uppercase tracking-wider">
-                            Ver Catálogo
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-
-            footer.classList.remove('hidden');
-            container.innerHTML = cart.map((item, idx) => `
-                <div class="flex gap-3.5 p-3 rounded-xl bg-pureBlack border border-white/10">
-                    <img src="${item.image}" alt="${item.name}" onerror="this.src='https://placehold.co/200x200/080808/C5A059?text=DX'" class="w-20 h-20 rounded-lg object-cover bg-obsidian shrink-0">
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-start justify-between gap-2">
-                            <h4 class="text-sm font-semibold text-white truncate">${item.name}</h4>
-                            <button onclick="removeCartItem(${idx})" class="text-silver hover:text-white text-xs">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-sm font-bold text-gold-bright">$${(item.price * item.qty).toLocaleString('es-MX')} MXN</span>
-                            <div class="flex items-center gap-2.5 bg-obsidian rounded-lg border border-white/10 px-2.5 py-1">
-                                <button onclick="updateCartQty(${idx}, -1)" class="text-silver hover:text-gold-bright text-xs">-</button>
-                                <span class="text-xs font-semibold text-white min-w-[14px] text-center">${item.qty}</span>
-                                <button onclick="updateCartQty(${idx}, 1)" class="text-silver hover:text-gold-bright text-xs">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-
-            const { subtotal, shipping, total } = calculateTotals();
-            document.getElementById('cart-subtotal').textContent = `$${subtotal.toLocaleString('es-MX')} MXN`;
-            document.getElementById('cart-shipping').textContent = shipping === 0 ? 'GRATIS' : `$${shipping} MXN`;
-            document.getElementById('cart-total').textContent = `$${total.toLocaleString('es-MX')} MXN`;
-            document.getElementById('checkout-btn-total').textContent = `$${total.toLocaleString('es-MX')} MXN`;
-        }
-
-        function toggleCartDrawer(open) {
-            const overlay = document.getElementById('cart-overlay');
-            if (open) {
-                overlay.classList.remove('hidden');
-                backToCartStep();
-            } else {
-                overlay.classList.add('hidden');
-            }
-        }
-
-        function goToCheckoutStep() {
-            if (cart.length === 0) return;
-            document.getElementById('drawer-title').textContent = 'Finalizar Pedido';
-            document.getElementById('cart-step-items').classList.add('hidden');
-            document.getElementById('cart-step-checkout').classList.remove('hidden');
-            document.getElementById('cart-step-success').classList.add('hidden');
-        }
-
-        function backToCartStep() {
-            document.getElementById('drawer-title').textContent = 'Tu Carrito';
-            document.getElementById('cart-step-items').classList.remove('hidden');
-            document.getElementById('cart-step-checkout').classList.add('hidden');
-            document.getElementById('cart-step-success').classList.add('hidden');
-        }
-
-        function validateCheckoutPhone(input) {
-            const digits = input.value.replace(/\D/g, '');
-            const hint = document.getElementById('chk-phone-hint');
-            if (digits.length > 0 && digits.length < 10) {
-                hint.textContent = `Faltan ${10 - digits.length} dígitos para completar tu número.`;
-                hint.className = 'text-[11px] text-gold-bright mt-1';
-            } else if (digits.length >= 10) {
-                hint.textContent = '✓ Número válido registrado.';
-                hint.className = 'text-[11px] text-white mt-1';
-            } else {
-                hint.textContent = 'Obligatorio para enviarte confirmación y número de guía.';
-                hint.className = 'text-[11px] text-silver mt-1';
-            }
-        }
-
-        function processCardOrder(e) {
-            e.preventDefault();
-            if (cart.length === 0) return;
-
-            const customerName = document.getElementById('chk-name').value.trim();
-            const customerPhone = document.getElementById('chk-phone').value.trim();
-            const phoneDigits = customerPhone.replace(/\D/g, '');
-
-            if (phoneDigits.length < 10) {
-                showPill('Ingresa un número de WhatsApp válido de al menos 10 dígitos');
-                document.getElementById('chk-phone').focus();
-                return;
-            }
-
-            const btn = document.getElementById('pay-submit-btn');
-            const originalHTML = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Procesando...</span>`;
-
-            setTimeout(() => {
-                const customerAddress = document.getElementById('chk-address').value.trim();
-                const customerNotes = document.getElementById('chk-notes').value.trim();
-                const { subtotal, shipping, total } = calculateTotals();
-                const orderId = 'DX-' + Math.floor(1000 + Math.random() * 9000);
-                const timestamp = new Date().toLocaleString('es-MX', { dateStyle: 'medium', timeStyle: 'short' });
-
-                const newOrder = {
-                    id: orderId,
-                    date: timestamp,
-                    customerName,
-                    customerPhone,
-                    customerAddress,
-                    customerNotes,
-                    paymentMethod: 'Mercado Pago (Tarjeta)',
-                    items: [...cart],
-                    subtotal,
-                    shipping,
-                    total,
-                    status: 'Pendiente de pago'
-                };
-
-                // Descontar stock
-                cart.forEach(cartItem => {
-                    const p = products.find(prod => prod.id === cartItem.productId);
-                    if (p) {
-                        p.stock = Math.max(0, Number(p.stock) - cartItem.qty);
-                    }
-                });
-                saveProductsToStorage();
-                renderProducts();
-
-                orders.unshift(newOrder);
-                saveOrdersToStorage();
-                updateOrderBadges();
-
-                cart = [];
-                saveCartToStorage();
-                renderCart();
-
-                btn.disabled = false;
-                btn.innerHTML = originalHTML;
-                showOrderSuccessScreen(newOrder);
-                triggerOwnerSaleAlert(newOrder);
-            }, 500);
-        }
-
-        function showOrderSuccessScreen(order) {
-            document.getElementById('drawer-title').textContent = 'Confirmación';
-            document.getElementById('cart-step-items').classList.add('hidden');
-            document.getElementById('cart-step-checkout').classList.add('hidden');
-            document.getElementById('cart-step-success').classList.remove('hidden');
-
-            document.getElementById('success-order-id').textContent = `#${order.id}`;
-
-            const itemsSummaryHTML = order.items.map(i =>
-                `<div class="flex justify-between text-xs text-silver">
-                    <span>${i.qty}x ${i.name}</span>
-                    <span class="font-medium text-white">$${(i.price * i.qty).toLocaleString('es-MX')}</span>
-                </div>`
-            ).join('');
-
-            document.getElementById('success-receipt-box').innerHTML = `
-                <div class="flex justify-between items-center border-b border-white/10 pb-2">
-                    <span class="text-silver">Cliente:</span>
-                    <span class="font-semibold text-white">${order.customerName}</span>
-                </div>
-                <div class="flex justify-between items-center border-b border-white/10 pb-2">
-                    <span class="text-silver">Teléfono:</span>
-                    <span class="font-semibold text-gold-bright">${order.customerPhone}</span>
-                </div>
-                <div class="space-y-1.5 py-2 border-b border-white/10">
-                    ${itemsSummaryHTML}
-                </div>
-                <div class="flex justify-between items-center pt-1">
-                    <span class="font-semibold text-white">Total:</span>
-                    <span class="text-sm font-bold text-gold-bright">$${order.total.toLocaleString('es-MX')} MXN</span>
-                </div>
-                ${settings.customMessage ? `<p class="text-[11px] text-silver pt-2 border-t border-white/10">${settings.customMessage}</p>` : ''}
-            `;
-
-            const mpBtn = document.getElementById('mp-pay-now-btn');
-            const mpWarning = document.getElementById('mp-missing-warning');
-            if (settings.paymentLink && settings.paymentLink.trim() !== '') {
-                mpBtn.href = settings.paymentLink.trim();
-                mpBtn.classList.remove('opacity-40', 'pointer-events-none');
-                mpWarning.classList.add('hidden');
-            } else {
-                mpBtn.href = '#';
-                mpBtn.classList.add('opacity-40', 'pointer-events-none');
-                mpWarning.classList.remove('hidden');
-            }
-
-            const itemsText = order.items.map(i => `• ${i.qty}x ${i.name} - $${i.price * i.qty} MXN`).join('\n');
-            const waMessage =
-`*NUEVO PEDIDO — DXNZZ STORE*
-Folio: #${order.id}
-
-Cliente: ${order.customerName}
-Teléfono: ${order.customerPhone}
-Dirección: ${order.customerAddress}
-${order.customerNotes ? `Notas: ${order.customerNotes}\n` : ''}
-Productos:
-${itemsText}
-
-Total: $${order.total.toLocaleString('es-MX')} MXN`;
-
-            const cleanOwnerPhone = (settings.ownerWhatsapp || '5213300000000').replace(/\D/g, '');
-            document.getElementById('whatsapp-notify-owner-btn').href = `https://wa.me/${cleanOwnerPhone}?text=${encodeURIComponent(waMessage)}`;
-        }
-
-        function resetAfterOrder() {
-            document.getElementById('checkout-form').reset();
-            toggleCartDrawer(false);
-        }
-
-        // ==================== ALERTA DE NUEVO PEDIDO ====================
-        function triggerOwnerSaleAlert(order) {
-            playSaleChime();
-            const toast = document.getElementById('live-sale-toast');
-            document.getElementById('toast-buyer-name').textContent = order.customerName;
-            document.getElementById('toast-order-id').textContent = `#${order.id}`;
-            document.getElementById('toast-total').textContent = `$${order.total.toLocaleString('es-MX')} MXN`;
-            document.getElementById('toast-buyer-phone').textContent = order.customerPhone;
-
-            const clientPhoneClean = formatPhoneForWa(order.customerPhone);
-            const greetMsg = `Hola ${order.customerName}, te escribimos de *Dxnzz Store* respecto a tu pedido *#${order.id}* ($${order.total} MXN).`;
-            document.getElementById('toast-whatsapp-client-btn').href = `https://wa.me/${clientPhoneClean}?text=${encodeURIComponent(greetMsg)}`;
-
-            toast.classList.remove('hidden');
-        }
-
-        function dismissSaleToast() {
-            document.getElementById('live-sale-toast').classList.add('hidden');
-        }
-
-        function simulateIncomingOrder() {
-            const sampleProduct = products[0] || { id: 'demo', name: 'Gorra Dxnzz', price: 650 };
-            const sampleOrder = {
-                id: 'DX-' + Math.floor(1000 + Math.random() * 9000),
-                date: new Date().toLocaleString('es-MX', { dateStyle: 'medium', timeStyle: 'short' }),
-                customerName: 'Cliente de Prueba',
-                customerPhone: '3318459920',
-                customerAddress: 'Guadalajara, Jalisco',
-                customerNotes: '',
-                paymentMethod: 'Mercado Pago (Tarjeta)',
-                items: [{ productId: sampleProduct.id, name: sampleProduct.name, price: sampleProduct.price, qty: 1 }],
-                subtotal: sampleProduct.price,
-                shipping: 99,
-                total: Number(sampleProduct.price) + 99,
-                status: 'Pendiente de pago'
-            };
-            orders.unshift(sampleOrder);
-            saveOrdersToStorage();
-            updateOrderBadges();
-            renderAdminOrders();
-            triggerOwnerSaleAlert(sampleOrder);
-        }
-
-        function formatPhoneForWa(phone) {
-            let digits = (phone || '').replace(/\D/g, '');
-            if (digits.length === 10) return '521' + digits;
-            return digits;
-        }
-
-        // ==================== PANEL DEL DUEÑO ====================
-        function openAdminModal(tabName = 'products') {
-            document.getElementById('admin-modal').classList.remove('hidden');
-            switchAdminTab(tabName);
-        }
-
-        function closeAdminModal() {
-            document.getElementById('admin-modal').classList.add('hidden');
-        }
-
-        function switchAdminTab(tabName) {
-            ['products', 'orders', 'settings'].forEach(t => {
-                const panel = document.getElementById(`admin-tab-${t}`);
-                const btn = document.getElementById(`tab-btn-${t}`);
-                if (t === tabName) {
-                    panel.classList.remove('hidden');
-                    btn.classList.add('border-gold-bright', 'text-gold-bright', 'bg-obsidian');
-                    btn.classList.remove('border-transparent', 'text-silver');
-                } else {
-                    panel.classList.add('hidden');
-                    btn.classList.remove('border-gold-bright', 'text-gold-bright', 'bg-obsidian');
-                    btn.classList.add('border-transparent', 'text-silver');
-                }
-            });
-
-            if (tabName === 'products') renderAdminProducts();
-            if (tabName === 'orders') renderAdminOrders();
-            if (tabName === 'settings') {
-                syncSettingsUI();
-                renderAdminReviews();
-            }
-        }
-
-        function handleImageUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const img = new Image();
-                img.onload = function () {
-                    const canvas = document.createElement('canvas');
-                    const MAX_SIZE = 750;
-                    let width = img.width;
-                    let height = img.height;
-
-                    if (width > height && width > MAX_SIZE) {
-                        height *= MAX_SIZE / width;
-                        width = MAX_SIZE;
-                    } else if (height > MAX_SIZE) {
-                        width *= MAX_SIZE / height;
-                        height = MAX_SIZE;
-                    }
-
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-                    uploadedImageBase64 = canvas.toDataURL('image/jpeg', 0.85);
-                    document.getElementById('prod-preview-img').src = uploadedImageBase64;
-                    document.getElementById('prod-url-input').value = '';
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function handleImageUrlInput(url) {
-            if (url && url.trim() !== '') {
-                uploadedImageBase64 = '';
-                document.getElementById('prod-preview-img').src = url.trim();
-            }
-        }
-
-        function saveProduct(e) {
-            e.preventDefault();
-            const editId = document.getElementById('prod-edit-id').value;
-            const name = document.getElementById('prod-name').value.trim();
-            const price = Number(document.getElementById('prod-price').value);
-            const stock = Number(document.getElementById('prod-stock').value);
-            const description = document.getElementById('prod-desc').value.trim();
-            const urlInput = document.getElementById('prod-url-input').value.trim();
-
-            let finalImage = uploadedImageBase64 || urlInput;
-            if (!finalImage && editId) {
-                const existing = products.find(p => p.id === editId);
-                finalImage = existing ? existing.image : '';
-            }
-            if (!finalImage) {
-                finalImage = 'https://placehold.co/600x600/080808/C5A059?text=DXNZZ+STORE';
-            }
-
-            if (editId) {
-                const idx = products.findIndex(p => p.id === editId);
-                if (idx > -1) {
-                    products[idx] = { ...products[idx], name, price, stock, description, image: finalImage };
-                }
-                showPill('Gorra actualizada');
-            } else {
-                products.unshift({
-                    id: 'prod-' + Date.now(),
-                    name,
-                    price,
-                    stock,
-                    description,
-                    image: finalImage
-                });
-                showPill('Gorra publicada en la tienda');
-            }
-
-            saveProductsToStorage();
-            renderProducts();
-            renderAdminProducts();
-            resetProductForm();
-        }
-
-        function editProduct(id) {
-            const p = products.find(item => item.id === id);
-            if (!p) return;
-
-            document.getElementById('prod-edit-id').value = p.id;
-            document.getElementById('prod-name').value = p.name;
-            document.getElementById('prod-price').value = p.price;
-            document.getElementById('prod-stock').value = p.stock;
-            document.getElementById('prod-desc').value = p.description || '';
-            document.getElementById('prod-preview-img').src = p.image;
-            document.getElementById('prod-url-input').value = p.image.startsWith('data:') ? '' : p.image;
-            uploadedImageBase64 = p.image.startsWith('data:') ? p.image : '';
-
-            document.getElementById('product-form-title').textContent = `Editando: ${p.name}`;
-            document.getElementById('save-product-btn').innerHTML = `<i class="fa-solid fa-check mr-2"></i>Guardar Cambios`;
-            document.getElementById('cancel-edit-btn').classList.remove('hidden');
-            document.getElementById('admin-product-form').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function deleteProduct(id) {
-            products = products.filter(p => p.id !== id);
-            saveProductsToStorage();
-            renderProducts();
-            renderAdminProducts();
-            showPill('Gorra eliminada');
-        }
-
-        function resetProductForm() {
-            document.getElementById('admin-product-form').reset();
-            document.getElementById('prod-edit-id').value = '';
-            uploadedImageBase64 = '';
-            document.getElementById('prod-preview-img').src = 'https://placehold.co/600x600/080808/C5A059?text=FOTO+GORRA';
-            document.getElementById('product-form-title').textContent = 'Subir Nueva Gorra';
-            document.getElementById('save-product-btn').innerHTML = `<i class="fa-solid fa-check mr-2"></i>Publicar en Tienda`;
-            document.getElementById('cancel-edit-btn').classList.add('hidden');
-        }
-
-        function renderAdminProducts() {
-            const container = document.getElementById('admin-products-list');
-            if (products.length === 0) {
-                container.innerHTML = `<p class="text-xs text-silver col-span-full">Aún no has subido ninguna gorra.</p>`;
-                return;
-            }
-            container.innerHTML = products.map(p => `
-                <div class="p-3.5 rounded-xl bg-pureBlack border border-white/10 flex gap-3 items-center">
-                    <img src="${p.image}" alt="${p.name}" onerror="this.src='https://placehold.co/150x150/080808/C5A059?text=DX'" class="w-16 h-16 rounded-lg object-cover shrink-0">
-                    <div class="flex-1 min-w-0">
-                        <h5 class="text-sm font-semibold text-white truncate">${p.name}</h5>
-                        <p class="text-xs text-gold-bright font-bold">$${Number(p.price).toLocaleString('es-MX')} MXN</p>
-                        <p class="text-[11px] text-silver">Disponibles: ${p.stock}</p>
-                        <div class="flex gap-2 mt-2">
-                            <button onclick="editProduct('${p.id}')" class="px-2.5 py-1 rounded bg-obsidian border border-white/10 hover:border-gold text-gold-bright text-[11px]">
-                                Editar
-                            </button>
-                            <button onclick="deleteProduct('${p.id}')" class="px-2.5 py-1 rounded bg-obsidian border border-white/10 hover:border-white/30 text-silver hover:text-white text-[11px]">
-                                Eliminar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // ==================== PEDIDOS EN PANEL DEL DUEÑO ====================
-        function updateOrderBadges() {
-            document.getElementById('nav-orders-badge').textContent = orders.length;
-            document.getElementById('admin-tab-orders-count').textContent = orders.length;
-        }
-
-        function toggleOrderStatus(orderId) {
-            const order = orders.find(o => o.id === orderId);
-            if (!order) return;
-            order.status = order.status === 'Pagado' ? 'Pendiente de pago' : 'Pagado';
-            saveOrdersToStorage();
-            renderAdminOrders();
-            showPill(`Pedido #${order.id}: ${order.status}`);
-        }
-
-        function renderAdminOrders() {
-            const container = document.getElementById('admin-orders-list');
-            if (orders.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 bg-pureBlack rounded-2xl border border-white/10">
-                        <p class="text-white text-sm font-medium">Aún no hay pedidos registrados.</p>
-                        <p class="text-xs text-silver mt-1">Cuando alguien compre, aquí aparecerá su nombre y teléfono.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = orders.map(order => {
-                const clientWa = formatPhoneForWa(order.customerPhone);
-                const cleanTel = (order.customerPhone || '').replace(/\D/g, '');
-                const msg = `Hola ${order.customerName}, te contacto de *Dxnzz Store* respecto a tu pedido *#${order.id}* ($${order.total} MXN).`;
-                const waLink = `https://wa.me/${clientWa}?text=${encodeURIComponent(msg)}`;
-                const isPaid = order.status === 'Pagado';
-
-                const itemsHTML = order.items.map(i =>
-                    `<span class="inline-block px-2.5 py-1 rounded-lg bg-obsidian border border-white/10 text-xs text-white mr-1.5 mb-1">
-                        ${i.qty}x ${i.name}
-                    </span>`
-                ).join('');
-
-                return `
-                <div class="p-5 rounded-2xl bg-pureBlack luxury-border space-y-4">
-                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-white/10 pb-3">
-                        <div>
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="font-display text-lg font-bold text-gold-bright">#${order.id}</span>
-                                <button onclick="toggleOrderStatus('${order.id}')"
-                                    class="px-2.5 py-0.5 rounded-full ${isPaid ? 'bg-obsidian luxury-border text-gold-bright' : 'bg-obsidian border border-white/15 text-silver'} text-[11px] font-semibold uppercase cursor-pointer">
-                                    ${order.status}
-                                </button>
-                                <span class="text-xs text-silver">• ${order.date}</span>
-                            </div>
-                            <h5 class="text-base font-bold text-white mt-1">${order.customerName}</h5>
-                        </div>
-
-                        <div class="flex flex-wrap items-center gap-2">
-                            <div class="px-3 py-2 rounded-xl bg-obsidian luxury-border text-xs">
-                                <span class="text-silver block text-[10px] uppercase">Teléfono Cliente</span>
-                                <strong class="text-white text-sm select-all">${order.customerPhone}</strong>
-                            </div>
-                            <a href="tel:${cleanTel}"
-                                class="px-3.5 py-2.5 rounded-xl bg-obsidian hover:bg-carbonHover border border-white/15 text-white font-semibold text-xs uppercase tracking-wider flex items-center gap-1.5">
-                                <i class="fa-solid fa-phone text-gold"></i>
-                                <span>Llamar</span>
-                            </a>
-                            <a href="${waLink}" target="_blank"
-                                class="px-4 py-2.5 rounded-xl bg-obsidian hover:bg-carbonHover luxury-border hover:border-gold-bright text-gold-bright font-semibold text-xs uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-brands fa-whatsapp text-sm"></i>
-                                <span>WhatsApp</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 text-xs">
-                        <div class="md:col-span-7 space-y-2">
-                            <div>${itemsHTML}</div>
-                            <p class="text-silver pt-1"><strong class="text-white">Dirección:</strong> ${order.customerAddress}</p>
-                            ${order.customerNotes ? `<p class="text-silver"><strong class="text-white">Notas:</strong> ${order.customerNotes}</p>` : ''}
-                        </div>
-                        <div class="md:col-span-5 bg-obsidian p-3.5 rounded-xl border border-white/10 flex flex-col justify-between">
-                            <div>
-                                <p class="text-silver text-[11px] uppercase">Pago</p>
-                                <p class="text-white font-medium mt-0.5">${order.paymentMethod}</p>
-                            </div>
-                            <div class="pt-3 mt-3 border-t border-white/10 flex items-baseline justify-between">
-                                <span class="text-silver">Total:</span>
-                                <span class="text-base font-bold text-gold-bright">$${Number(order.total).toLocaleString('es-MX')} MXN</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `;
-            }).join('');
-        }
-
-        // ==================== CONFIGURACIÓN ====================
-        function syncSettingsUI() {
-            document.getElementById('set-owner-whatsapp').value = settings.ownerWhatsapp || '';
-            document.getElementById('set-payment-link').value = settings.paymentLink || '';
-            document.getElementById('set-custom-message').value = settings.customMessage || '';
-        }
-
-        function saveStoreSettings(e) {
-            e.preventDefault();
-            settings.ownerWhatsapp = document.getElementById('set-owner-whatsapp').value.trim();
-            settings.paymentLink = document.getElementById('set-payment-link').value.trim();
-            settings.customMessage = document.getElementById('set-custom-message').value.trim();
-            localStorage.setItem('dxnzz_settings', JSON.stringify(settings));
-            showPill('Configuración guardada');
-        }
-
-        // ==================== RESEÑAS (CORREGIDO SIN UNDEFINED) ====================
-        function toggleReviewForm() {
-            document.getElementById('review-form-box').classList.toggle('hidden');
-        }
-
-        function submitReview(e) {
-            e.preventDefault();
-            const author = document.getElementById('rev-author').value.trim();
-            const product = document.getElementById('rev-product').value.trim();
-            const rating = Math.min(5, Math.max(1, Number(document.getElementById('rev-rating').value) || 5));
-            const comment = document.getElementById('rev-comment').value.trim();
-
-            if (!author || !product || !comment) {
-                showPill('Completa todos los campos de la reseña');
-                return;
-            }
-
-            reviews.unshift({
-                id: 'rev-' + Date.now(),
-                author,
-                product,
-                rating,
-                comment,
-                date: new Date().toLocaleDateString('es-MX')
-            });
-
-            saveReviewsToStorage();
-            renderReviews();
-            e.target.reset();
-            toggleReviewForm();
-            showPill('Reseña publicada');
-        }
-
-        function deleteReview(id) {
-            reviews = reviews.filter(r => r.id !== id);
-            saveReviewsToStorage();
-            renderReviews();
-            renderAdminReviews();
-            showPill('Reseña eliminada');
-        }
-
-        function renderReviews() {
-            const grid = document.getElementById('reviews-grid');
-            const validReviews = reviews.filter(r => r && r.author && r.product && r.comment);
-
-            if (validReviews.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full text-center py-12 px-6 bg-obsidian border border-white/10 rounded-2xl">
-                        <p class="text-sm text-silver">Aún no hay reseñas publicadas. Sé el primero en compartir tu experiencia.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            grid.innerHTML = validReviews.map(r => {
-                const count = Math.min(5, Math.max(1, Number(r.rating) || 5));
-                const stars = '★'.repeat(count) + '☆'.repeat(5 - count);
-                return `
-                <div class="p-6 rounded-2xl bg-pureBlack luxury-border flex flex-col justify-between space-y-4">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-gold-bright text-xs tracking-widest">${stars}</span>
-                            <span class="text-[11px] text-silver flex items-center gap-1.5">
-                                <i class="fa-solid fa-circle-check text-gold"></i> Compra Verificada
-                            </span>
-                        </div>
-                        <p class="text-sm text-white/90 mt-3 leading-relaxed">"${r.comment}"</p>
-                    </div>
-                    <div class="pt-3 border-t border-white/10">
-                        <p class="text-sm font-semibold text-white">${r.author}</p>
-                        <p class="text-xs text-gold mt-0.5">${r.product}</p>
-                    </div>
-                </div>
-                `;
-            }).join('');
-        }
-
-        function renderAdminReviews() {
-            const container = document.getElementById('admin-reviews-list');
-            if (!container) return;
-            const validReviews = reviews.filter(r => r && r.author && r.product && r.comment);
-
-            if (validReviews.length === 0) {
-                container.innerHTML = `<p class="text-xs text-silver">No hay reseñas publicadas.</p>`;
-                return;
-            }
-
-            container.innerHTML = validReviews.map(r => `
-                <div class="p-3 rounded-xl bg-obsidian border border-white/10 flex items-center justify-between gap-3 text-xs">
-                    <div class="min-w-0">
-                        <p class="text-white font-semibold truncate">${r.author} <span class="text-gold font-normal">• ${r.product}</span></p>
-                        <p class="text-silver truncate mt-0.5">"${r.comment}"</p>
-                    </div>
-                    <button onclick="deleteReview('${r.id}')" class="px-2.5 py-1.5 rounded-lg bg-pureBlack border border-white/10 text-silver hover:text-white shrink-0">
-                        Eliminar
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        // ==================== NOTIFICACIÓN DISCRETA ====================
-        let pillTimeout;
-        function showPill(msg) {
-            const pill = document.getElementById('feedback-pill');
-            document.getElementById('feedback-pill-text').textContent = msg;
-            pill.classList.remove('hidden');
-            clearTimeout(pillTimeout);
-            pillTimeout = setTimeout(() => {
-                pill.classList.add('hidden');
-            }, 2800);
-        }
-    </script>
+      } else {
+        products.unshift({
+          id: 'cap_' + Date.now(),
+          name,
+          price,
+          stock,
+          desc,
+          image: finalImage
+        });
+      }
+
+      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+      resetProductForm();
+      renderProducts();
+      renderOwnerProducts();
+    }
+
+    function editProduct(id) {
+      const prod = products.find(p => p.id === id);
+      if (!prod) return;
+      document.getElementById('edit-product-id').value = prod.id;
+      document.getElementById('prod-name').value = prod.name;
+      document.getElementById('prod-price').value = prod.price;
+      document.getElementById('prod-stock').value = prod.stock;
+      document.getElementById('prod-desc').value = prod.desc || '';
+      document.getElementById('prod-image-url').value = prod.image.startsWith('http') ? prod.image : '';
+      uploadedBase64Image = prod.image;
+      document.getElementById('image-preview').src = prod.image;
+      document.getElementById('image-preview-wrapper').classList.remove('hidden');
+      document.getElementById('product-form-title').textContent = 'Editar Gorra';
+      document.getElementById('cancel-edit-btn').classList.remove('hidden');
+    }
+
+    function deleteProduct(id) {
+      if (!isOwnerLoggedIn) return;
+      products = products.filter(p => p.id !== id);
+      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+      renderProducts();
+      renderOwnerProducts();
+    }
+
+    function resetProductForm() {
+      document.getElementById('edit-product-id').value = '';
+      document.getElementById('prod-name').value = '';
+      document.getElementById('prod-price').value = '';
+      document.getElementById('prod-stock').value = '10';
+      document.getElementById('prod-desc').value = '';
+      document.getElementById('prod-image-file').value = '';
+      document.getElementById('prod-image-url').value = '';
+      uploadedBase64Image = '';
+      document.getElementById('image-preview-wrapper').classList.add('hidden');
+      document.getElementById('product-form-title').textContent = 'Agregar Nueva Gorra';
+      document.getElementById('cancel-edit-btn').classList.add('hidden');
+    }
+
+    function renderOwnerProducts() {
+      const container = document.getElementById('owner-products-list');
+      if (products.length === 0) {
+        container.innerHTML = `<p class="text-xs text-neutral-500 py-4 text-center border border-white/5 rounded">No tienes gorras publicadas todavía.</p>`;
+        return;
+      }
+      container.innerHTML = products.map(p => `
+        <div class="flex items-center justify-between gap-3 bg-black border border-white/10 p-3 rounded">
+          <div class="flex items-center gap-3 min-w-0">
+            <img src="${p.image}" alt="${p.name}" class="w-12 h-12 object-cover rounded border border-white/10 shrink-0" />
+            <div class="min-w-0">
+              <p class="text-xs font-medium text-white truncate">${p.name}</p>
+              <p class="text-[11px] text-gold">$${p.price.toLocaleString('es-MX')} MXN · Stock: ${p.stock}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="editProduct('${p.id}')" class="text-[11px] border border-white/15 hover:border-gold text-neutral-300 hover:text-gold px-2.5 py-1 rounded transition">Editar</button>
+            <button onclick="deleteProduct('${p.id}')" class="text-[11px] border border-white/15 hover:border-red-500 text-neutral-400 hover:text-red-400 px-2.5 py-1 rounded transition">Eliminar</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Renderizado Catálogo Público
+    function renderProducts() {
+      const grid = document.getElementById('products-grid');
+      const emptyState = document.getElementById('empty-catalog-state');
+      const countLabel = document.getElementById('catalog-count-label');
+
+      countLabel.textContent = `${products.length} ${products.length === 1 ? 'modelo' : 'modelos'}`;
+
+      if (products.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      grid.innerHTML = products.map(p => `
+        <article class="bg-[#070707] border border-white/10 hover:border-gold/50 rounded-lg overflow-hidden flex flex-col justify-between transition group">
+          <div>
+            <div class="relative aspect-square bg-black overflow-hidden">
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <span class="absolute top-3 right-3 bg-black/85 border border-white/15 text-[10px] text-neutral-300 px-2.5 py-1 rounded">
+                ${p.stock > 0 ? `Disponibles: ${p.stock}` : 'Agotado'}
+              </span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-sm font-semibold text-white tracking-wide">${p.name}</h3>
+              ${p.desc ? `<p class="text-xs text-neutral-400 mt-1.5 line-clamp-2 font-light">${p.desc}</p>` : ''}
+            </div>
+          </div>
+          <div class="px-5 pb-5 pt-3 border-t border-white/5 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
+              <span class="text-base font-semibold text-gold">$${p.price.toLocaleString('es-MX')} <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
+            </div>
+            <button
+              onclick="addToCart('${p.id}')"
+              ${p.stock <= 0 ? 'disabled' : ''}
+              class="text-xs uppercase tracking-wider px-4 py-2 rounded font-medium transition ${
+                p.stock > 0
+                  ? 'bg-white text-black hover:bg-gold hover:text-black'
+                  : 'bg-neutral-900 text-neutral-600 cursor-not-allowed'
+              }"
+            >
+              ${p.stock > 0 ? 'Agregar' : 'Agotado'}
+            </button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // Carrito y Pedidos
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product || product.stock <= 0) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        if (existing.qty < product.stock) existing.qty += 1;
+      } else {
+        cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, qty: 1 });
+      }
+      renderCart();
+      openCartModal();
+    }
+
+    function updateCartQty(productId, delta) {
+      const idx = cart.findIndex(item => item.id === productId);
+      if (idx === -1) return;
+      const product = products.find(p => p.id === productId);
+      const nextQty = cart[idx].qty + delta;
+
+      if (nextQty <= 0) {
+        cart.splice(idx, 1);
+      } else if (!product || nextQty <= product.stock) {
+        cart[idx].qty = nextQty;
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items-container');
+      const countEl = document.getElementById('cart-count');
+      const totalEl = document.getElementById('cart-total');
+      const checkoutForm = document.getElementById('checkout-form-section');
+      const cartFooter = document.getElementById('cart-footer');
+
+      const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+      const totalAmount = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+
+      countEl.textContent = totalQty;
+      totalEl.textContent = `$${totalAmount.toLocaleString('es-MX')} MXN`;
+
+      if (cart.length === 0) {
+        container.innerHTML = `<p class="text-xs text-neutral-500 py-10 text-center">Tu bolsa está vacía.</p>`;
+        checkoutForm.classList.add('hidden');
+        cartFooter.classList.add('hidden');
+        return;
+      }
+
+      checkoutForm.classList.remove('hidden');
+      cartFooter.classList.remove('hidden');
+      document.getElementById('order-success-box').classList.add('hidden');
+
+      container.innerHTML = cart.map(item => `
+        <div class="py-3 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded border border-white/10" />
+            <div class="min-w-0">
+              <p class="text-xs font-medium text-white truncate">${item.name}</p>
+              <p class="text-[11px] text-gold">$${item.price.toLocaleString('es-MX')} MXN</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="updateCartQty('${item.id}', -1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold">-</button>
+            <span class="text-xs w-4 text-center">${item.qty}</span>
+            <button onclick="updateCartQty('${item.id}', 1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openCartModal() {
+      document.getElementById('cart-modal').classList.remove('hidden');
+    }
+
+    function closeCartModal() {
+      document.getElementById('cart-modal').classList.add('hidden');
+    }
+
+    function submitCustomerOrder() {
+      if (cart.length === 0) return;
+
+      const name = document.getElementById('cust-name').value.trim();
+      const phone = document.getElementById('cust-phone').value.replace(/\D/g, '');
+      const address = document.getElementById('cust-address').value.trim();
+      const paymentMethod = document.getElementById('cust-payment-method').value;
+
+      if (!name || phone.length < 10 || !address) {
+        alert('Por favor completa tu nombre, un número de teléfono válido de 10 dígitos y tu dirección.');
+        return;
+      }
+
+      const totalAmount = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+      const itemsSummary = cart.map(i => `${i.qty}x ${i.name}`).join(', ');
+
+      // Descontar stock
+      cart.forEach(item => {
+        const prod = products.find(p => p.id === item.id);
+        if (prod) prod.stock = Math.max(0, prod.stock - item.qty);
+      });
+      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+
+      const newOrder = {
+        id: 'PED-' + Math.floor(1000 + Math.random() * 9000),
+        customerName: name,
+        customerPhone: phone,
+        address,
+        paymentMethod,
+        items: itemsSummary,
+        total: totalAmount,
+        status: 'Pendiente de pago',
+        date: new Date().toLocaleString('es-MX')
+      };
+
+      orders.unshift(newOrder);
+      localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(orders));
+
+      // Construir mensaje de WhatsApp para el dueño
+      const waText = encodeURIComponent(
+        `Hola Dxnzz Store, acabo de hacer un pedido (${newOrder.id}):\n` +
+        `• Nombre: ${name}\n` +
+        `• Mi teléfono: ${phone}\n` +
+        `• Gorras: ${itemsSummary}\n` +
+        `• Total: $${totalAmount.toLocaleString('es-MX')} MXN\n` +
+        `• Pago: ${paymentMethod}\n` +
+        `• Envío: ${address}`
+      );
+      const cleanOwnerWa = settings.waNumber.replace(/\D/g, '');
+      const ownerWaUrl = `https://wa.me/${cleanOwnerWa}?text=${waText}`;
+
+      document.getElementById('checkout-pay-card-btn').href = settings.paymentLink || '#';
+      document.getElementById('checkout-send-wa-btn').href = ownerWaUrl;
+
+      cart = [];
+      renderProducts();
+      renderCart();
+      document.getElementById('order-success-box').classList.remove('hidden');
+
+      // Mostrar alerta instantánea si el dueño tiene sesión abierta
+      if (isOwnerLoggedIn) {
+        updateOrdersBadge();
+        triggerOwnerNotification(newOrder);
+      }
+    }
+
+    function triggerOwnerNotification(order) {
+      const banner = document.getElementById('owner-alert-banner');
+      document.getElementById('alert-customer-name').textContent = `${order.customerName} (${order.id})`;
+      document.getElementById('alert-order-summary').textContent = `${order.items} — $${order.total.toLocaleString('es-MX')} MXN`;
+      document.getElementById('alert-customer-phone').textContent = `Tel: ${order.customerPhone}`;
+      const customerWaMsg = encodeURIComponent(`Hola ${order.customerName}, recibimos tu pedido ${order.id} en Dxnzz Store (${order.items}).`);
+      document.getElementById('alert-wa-link').href = `https://wa.me/521${order.customerPhone}?text=${customerWaMsg}`;
+      banner.classList.remove('hidden');
+    }
+
+    function closeAlertBanner() {
+      document.getElementById('owner-alert-banner').classList.add('hidden');
+    }
+
+    function updateOrdersBadge() {
+      const badge = document.getElementById('owner-orders-badge');
+      const tabCount = document.getElementById('tab-orders-count');
+      tabCount.textContent = orders.length;
+      if (orders.length > 0) {
+        badge.textContent = orders.length;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    function renderOwnerOrders() {
+      const container = document.getElementById('owner-orders-list');
+      updateOrdersBadge();
+      if (orders.length === 0) {
+        container.innerHTML = `<p class="text-xs text-neutral-500 py-6 text-center border border-white/5 rounded">Aún no hay pedidos registrados.</p>`;
+        return;
+      }
+      container.innerHTML = orders.map(o => {
+        const waClientUrl = `https://wa.me/521${o.customerPhone}?text=${encodeURIComponent(`Hola ${o.customerName}, te escribimos de Dxnzz Store respecto a tu pedido ${o.id}.`)}`;
+        return `
+          <div class="bg-black border border-white/10 rounded-lg p-4 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-gold">${o.id} · ${o.customerName}</span>
+              <span class="text-[10px] text-neutral-500">${o.date}</span>
+            </div>
+            <p class="text-xs text-white">${o.items} — <span class="text-gold font-semibold">$${o.total.toLocaleString('es-MX')} MXN</span></p>
+            <p class="text-[11px] text-neutral-400">Teléfono cliente: <span class="text-white font-medium">${o.customerPhone}</span> · ${o.paymentMethod}</p>
+            <p class="text-[11px] text-neutral-500">Dirección: ${o.address}</p>
+            <div class="pt-2 flex flex-wrap gap-2">
+              <a href="${waClientUrl}" target="_blank" class="bg-gold text-black text-[11px] font-semibold px-3 py-1.5 rounded hover:bg-gold-light transition">
+                WhatsApp al Cliente
+              </a>
+              <a href="tel:${o.customerPhone}" class="border border-white/15 text-white text-[11px] px-3 py-1.5 rounded hover:border-gold transition">
+                Llamar
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function clearAllOrders() {
+      if (!isOwnerLoggedIn) return;
+      orders = [];
+      localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(orders));
+      renderOwnerOrders();
+    }
+
+    // Configuración Dueño
+    function loadSettingsForm() {
+      document.getElementById('set-wa-number').value = settings.waNumber || '';
+      document.getElementById('set-payment-link').value = settings.paymentLink || '';
+      document.getElementById('set-admin-email').value = settings.adminEmail || '';
+      document.getElementById('set-admin-pass').value = settings.adminPass || '';
+    }
+
+    function saveOwnerSettings(e) {
+      e.preventDefault();
+      if (!isOwnerLoggedIn) return;
+      settings.waNumber = document.getElementById('set-wa-number').value.trim();
+      settings.paymentLink = document.getElementById('set-payment-link').value.trim();
+      settings.adminEmail = document.getElementById('set-admin-email').value.trim();
+      settings.adminPass = document.getElementById('set-admin-pass').value;
+      localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
+      updateFooterLinks();
+      alert('Configuración guardada correctamente.');
+    }
+
+    function updateFooterLinks() {
+      const cleanWa = (settings.waNumber || '').replace(/\D/g, '');
+      document.getElementById('footer-wa-contact').href = cleanWa ? `https://wa.me/${cleanWa}` : '#';
+    }
+
+    // Reseñas Verificadas
+    function openReviewModal() {
+      document.getElementById('review-modal').classList.remove('hidden');
+    }
+
+    function closeReviewModal() {
+      document.getElementById('review-modal').classList.add('hidden');
+    }
+
+    function submitReview(e) {
+      e.preventDefault();
+      const author = document.getElementById('rev-author').value.trim();
+      const product = document.getElementById('rev-product').value.trim();
+      const comment = document.getElementById('rev-comment').value.trim();
+      if (!author || !product || !comment) return;
+
+      reviews.unshift({
+        id: 'rev_' + Date.now(),
+        author,
+        product,
+        comment
+      });
+      localStorage.setItem(STORAGE_KEYS.REVIEWS, JSON.stringify(reviews));
+      document.getElementById('rev-author').value = '';
+      document.getElementById('rev-product').value = '';
+      document.getElementById('rev-comment').value = '';
+      closeReviewModal();
+      renderReviews();
+    }
+
+    function deleteReview(id) {
+      if (!isOwnerLoggedIn) return;
+      reviews = reviews.filter(r => r.id !== id);
+      localStorage.setItem(STORAGE_KEYS.REVIEWS, JSON.stringify(reviews));
+      renderReviews();
+    }
+
+    function renderReviews() {
+      const grid = document.getElementById('reviews-grid');
+      const emptyMsg = document.getElementById('empty-reviews-msg');
+      if (!grid || !emptyMsg) return;
+
+      if (reviews.length === 0) {
+        grid.innerHTML = '';
+        emptyMsg.classList.remove('hidden');
+        return;
+      }
+
+      emptyMsg.classList.add('hidden');
+      grid.innerHTML = reviews.map(r => `
+        <div class="bg-[#070707] border border-white/10 rounded-lg p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] uppercase tracking-widest text-gold">Compra Verificada</span>
+              ${isOwnerLoggedIn ? `<button onclick="deleteReview('${r.id}')" class="text-[10px] text-neutral-500 hover:text-red-400">Eliminar</button>` : ''}
+            </div>
+            <p class="text-xs text-neutral-300 leading-relaxed">"${r.comment}"</p>
+          </div>
+          <div class="border-t border-white/10 mt-4 pt-3">
+            <p class="text-xs font-medium text-white">${r.author}</p>
+            <p class="text-[11px] text-gold mt-0.5">${r.product}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
 </body>
 </html>
