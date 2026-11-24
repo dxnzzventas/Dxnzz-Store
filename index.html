@@ -36,6 +36,10 @@
       color: #FFFFFF;
       font-family: 'Inter', sans-serif;
     }
+    .brand-logo-img {
+      mix-blend-mode: lighten;
+      filter: contrast(1.2) brightness(1.05);
+    }
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -77,14 +81,12 @@
   <!-- Header -->
   <header class="sticky top-0 z-40 bg-black/95 backdrop-blur-md border-b border-white/10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded border border-gold flex items-center justify-center bg-black">
-          <span class="font-display text-gold font-bold text-sm tracking-wider">DX</span>
-        </div>
-        <div>
-          <span class="font-display text-base sm:text-lg tracking-[0.18em] text-white font-semibold block leading-none">DXNZZ STORE</span>
-          <span class="text-[9px] tracking-[0.28em] text-gold uppercase block mt-1">Headwear</span>
-        </div>
+      <a href="#" class="flex items-center group focus:outline-none" aria-label="Dxnzz Store">
+        <img
+          src="Logo.png"
+          alt="DS Monogram"
+          class="brand-logo-img h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+        />
       </a>
 
       <div class="flex items-center gap-2 sm:gap-3">
