@@ -189,7 +189,7 @@
     </div>
   </footer>
 
-  <!-- MODAL: Iniciar Sesión Dueño -->
+  <!-- MODAL: Iniciar Sesión Dueño (Sin correos ni pistas visibles) -->
   <div id="login-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-[#080808] border border-gold rounded-lg max-w-sm w-full p-6">
       <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-5">
@@ -200,23 +200,20 @@
         <button onclick="closeLoginModal()" class="text-neutral-500 hover:text-white text-sm">✕</button>
       </div>
 
-      <form onsubmit="handleOwnerLogin(event)" class="space-y-4">
+      <form onsubmit="handleOwnerLogin(event)" autocomplete="off" class="space-y-4">
         <div>
           <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Correo de Administrador</label>
-          <input id="login-email" type="email" required placeholder="admin@dxnzzstore.com" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+          <input id="login-email" type="email" required autocomplete="off" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
         </div>
         <div>
           <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Contraseña</label>
-          <input id="login-password" type="password" required placeholder="••••••••" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+          <input id="login-password" type="password" required autocomplete="new-password" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
         </div>
         <p id="login-error" class="hidden text-xs text-red-400">Correo o contraseña incorrectos.</p>
         <button type="submit" class="w-full bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest py-2.5 rounded transition">
           Entrar al Panel
         </button>
       </form>
-      <p class="text-[10px] text-neutral-500 mt-4 text-center">
-        Acceso predeterminado: <span class="text-neutral-300">admin@dxnzzstore.com</span> / <span class="text-neutral-300">dxnzz2026</span>
-      </p>
     </div>
   </div>
 
@@ -451,11 +448,11 @@
   <script>
     // Estado en LocalStorage
     const STORAGE_KEYS = {
-      PRODUCTS: 'dxnzz_store_products_v3',
-      ORDERS: 'dxnzz_store_orders_v3',
-      REVIEWS: 'dxnzz_store_reviews_v3',
-      SETTINGS: 'dxnzz_store_settings_v3',
-      SESSION: 'dxnzz_store_owner_session_v3'
+      PRODUCTS: 'dxnzz_store_products_v4',
+      ORDERS: 'dxnzz_store_orders_v4',
+      REVIEWS: 'dxnzz_store_reviews_v4',
+      SETTINGS: 'dxnzz_store_settings_v4',
+      SESSION: 'dxnzz_store_owner_session_v4'
     };
 
     const DEFAULT_SETTINGS = {
@@ -507,6 +504,8 @@
     }
 
     function openLoginModal() {
+      document.getElementById('login-email').value = '';
+      document.getElementById('login-password').value = '';
       document.getElementById('login-error').classList.add('hidden');
       document.getElementById('login-modal').classList.remove('hidden');
     }
