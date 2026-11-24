@@ -17,9 +17,9 @@
             surface: '#080808',
             card: '#0D0D0D',
             gold: {
-              DEFAULT: '#D4AF37',
-              dark: '#A6831E',
-              light: '#F2D675'
+              DEFAULT: '#FFD700',
+              dark: '#E5B800',
+              light: '#FFF066'
             }
           },
           fontFamily: {
@@ -36,12 +36,6 @@
       color: #FFFFFF;
       font-family: 'Inter', sans-serif;
     }
-    .gold-border {
-      border-color: rgba(212, 175, 55, 0.28);
-    }
-    .gold-border-subtle {
-      border-color: rgba(255, 255, 255, 0.08);
-    }
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -53,14 +47,14 @@
       border-radius: 3px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #D4AF37;
+      background: #FFD700;
     }
   </style>
 </head>
 <body class="bg-black text-white min-h-screen flex flex-col selection:bg-gold selection:text-black">
 
   <!-- Barra de Notificación Rápida (Solo visible en sesión de dueño al recibir pedido) -->
-  <div id="owner-alert-banner" class="hidden fixed top-4 right-4 z-50 max-w-sm w-full bg-[#0A0A0A] border border-gold shadow-2xl rounded-lg p-4 transition-all">
+  <div id="owner-alert-banner" class="hidden fixed top-4 right-4 z-50 max-w-sm w-full bg-[#080808] border border-gold shadow-2xl rounded-lg p-4 transition-all">
     <div class="flex items-start justify-between gap-3">
       <div>
         <span class="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">Nueva Compra Registrada</span>
@@ -84,12 +78,12 @@
   <header class="sticky top-0 z-40 bg-black/95 backdrop-blur-md border-b border-white/10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded border border-gold/60 flex items-center justify-center bg-black">
+        <div class="w-9 h-9 rounded border border-gold flex items-center justify-center bg-black">
           <span class="font-display text-gold font-bold text-sm tracking-wider">DX</span>
         </div>
         <div>
           <span class="font-display text-base sm:text-lg tracking-[0.18em] text-white font-semibold block leading-none">DXNZZ STORE</span>
-          <span class="text-[9px] tracking-[0.28em] text-gold/80 uppercase block mt-1">Headwear</span>
+          <span class="text-[9px] tracking-[0.28em] text-gold uppercase block mt-1">Headwear</span>
         </div>
       </a>
 
@@ -101,7 +95,7 @@
 
         <!-- Controles visibles SOLO cuando el dueño inició sesión -->
         <div id="owner-header-controls" class="hidden flex items-center gap-2">
-          <button onclick="openOwnerPanel('products')" class="relative text-xs bg-black border border-gold/70 text-gold hover:bg-gold hover:text-black px-3 py-1.5 rounded font-medium transition flex items-center gap-1.5">
+          <button onclick="openOwnerPanel('products')" class="relative text-xs bg-black border border-gold text-gold hover:bg-gold hover:text-black px-3 py-1.5 rounded font-medium transition flex items-center gap-1.5">
             <span>Panel Dueño</span>
             <span id="owner-orders-badge" class="hidden bg-gold text-black text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
           </button>
@@ -128,7 +122,7 @@
         Piezas seleccionadas en negro profundo y detalles dorados. Compra directa con pago en línea y atención personalizada.
       </p>
       <div class="mt-7 flex items-center justify-center gap-4">
-        <a href="#catalogo" class="border border-gold/70 text-gold hover:bg-gold hover:text-black text-xs uppercase tracking-[0.2em] px-6 py-2.5 rounded transition">
+        <a href="#catalogo" class="border border-gold text-gold hover:bg-gold hover:text-black text-xs uppercase tracking-[0.2em] px-6 py-2.5 rounded transition">
           Ver Catálogo
         </a>
       </div>
@@ -197,7 +191,7 @@
 
   <!-- MODAL: Iniciar Sesión Dueño -->
   <div id="login-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-[#080808] border border-gold/40 rounded-lg max-w-sm w-full p-6">
+    <div class="bg-[#080808] border border-gold rounded-lg max-w-sm w-full p-6">
       <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-5">
         <div>
           <span class="text-[10px] uppercase tracking-[0.25em] text-gold block">Área Privada</span>
@@ -228,7 +222,7 @@
 
   <!-- MODAL: Panel del Dueño (Solo accesible tras iniciar sesión) -->
   <div id="owner-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
-    <div class="bg-[#080808] border border-gold/40 rounded-lg max-w-3xl w-full p-5 sm:p-6 my-auto max-h-[92vh] overflow-y-auto">
+    <div class="bg-[#080808] border border-gold rounded-lg max-w-3xl w-full p-5 sm:p-6 my-auto max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
         <div>
           <span class="text-[10px] uppercase tracking-[0.25em] text-gold block">Administración</span>
@@ -284,7 +278,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
             <div>
               <label class="block text-[11px] text-neutral-400 mb-1">Subir Foto desde tu dispositivo *</label>
-              <input id="prod-image-file" type="file" accept="image/*" onchange="previewUploadedImage(event)" class="w-full text-xs text-neutral-400 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border file:border-gold/50 file:text-xs file:bg-black file:text-gold hover:file:bg-gold hover:file:text-black cursor-pointer" />
+              <input id="prod-image-file" type="file" accept="image/*" onchange="previewUploadedImage(event)" class="w-full text-xs text-neutral-400 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border file:border-gold file:text-xs file:bg-black file:text-gold hover:file:bg-gold hover:file:text-black cursor-pointer" />
             </div>
             <div>
               <label class="block text-[11px] text-neutral-400 mb-1">O pegar enlace de imagen (opcional)</label>
@@ -293,7 +287,7 @@
           </div>
 
           <div id="image-preview-wrapper" class="hidden flex items-center gap-3 pt-1">
-            <img id="image-preview" src="" alt="Vista previa" class="w-16 h-16 object-cover rounded border border-gold/40 bg-black" />
+            <img id="image-preview" src="" alt="Vista previa" class="w-16 h-16 object-cover rounded border border-gold bg-black" />
             <span class="text-[11px] text-neutral-400">Vista previa de la foto</span>
           </div>
 
@@ -398,7 +392,7 @@
         </div>
 
         <!-- Confirmación de Pedido Realizado -->
-        <div id="order-success-box" class="hidden border border-gold/50 bg-black rounded-lg p-4 mt-4 space-y-3">
+        <div id="order-success-box" class="hidden border border-gold bg-black rounded-lg p-4 mt-4 space-y-3">
           <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-semibold block">Pedido Registrado</span>
           <p class="text-xs text-neutral-300 leading-relaxed">
             Tu pedido quedó registrado con tu número de contacto. Completa el pago con tarjeta o envía el comprobante directo por WhatsApp para confirmar tu envío.
@@ -457,11 +451,11 @@
   <script>
     // Estado en LocalStorage
     const STORAGE_KEYS = {
-      PRODUCTS: 'dxnzz_store_products_v2',
-      ORDERS: 'dxnzz_store_orders_v2',
-      REVIEWS: 'dxnzz_store_reviews_v2',
-      SETTINGS: 'dxnzz_store_settings_v2',
-      SESSION: 'dxnzz_store_owner_session_v2'
+      PRODUCTS: 'dxnzz_store_products_v3',
+      ORDERS: 'dxnzz_store_orders_v3',
+      REVIEWS: 'dxnzz_store_reviews_v3',
+      SETTINGS: 'dxnzz_store_settings_v3',
+      SESSION: 'dxnzz_store_owner_session_v3'
     };
 
     const DEFAULT_SETTINGS = {
@@ -711,7 +705,7 @@
 
       emptyState.classList.add('hidden');
       grid.innerHTML = products.map(p => `
-        <article class="bg-[#070707] border border-white/10 hover:border-gold/50 rounded-lg overflow-hidden flex flex-col justify-between transition group">
+        <article class="bg-[#070707] border border-white/10 hover:border-gold rounded-lg overflow-hidden flex flex-col justify-between transition group">
           <div>
             <div class="relative aspect-square bg-black overflow-hidden">
               <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
