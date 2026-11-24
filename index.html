@@ -90,10 +90,18 @@
       </a>
 
       <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Botón visible SOLO cuando NO hay sesión de dueño -->
-        <button id="btn-login-open" onclick="openLoginModal()" class="text-xs text-neutral-400 hover:text-white border border-white/10 hover:border-white/25 px-3 py-1.5 rounded transition">
+        <!-- Botón visible cuando NO hay sesión iniciada -->
+        <button id="btn-login-open" onclick="openAuthModal('login')" class="text-xs text-neutral-400 hover:text-white border border-white/10 hover:border-white/25 px-3 py-1.5 rounded transition">
           Iniciar sesión
         </button>
+
+        <!-- Estado cuando un usuario estándar (NO dueño) inició sesión -->
+        <div id="user-header-controls" class="hidden flex items-center gap-2">
+          <span id="user-display-badge" class="hidden sm:inline-block text-[11px] text-neutral-300 bg-[#0A0A0A] border border-white/10 px-2.5 py-1 rounded truncate max-w-[160px]"></span>
+          <button onclick="logoutUser()" class="text-xs text-neutral-400 hover:text-white border border-white/10 px-2.5 py-1.5 rounded transition" title="Cerrar sesión">
+            Salir
+          </button>
+        </div>
 
         <!-- Controles visibles SOLO cuando el dueño inició sesión -->
         <div id="owner-header-controls" class="hidden flex items-center gap-2">
@@ -101,7 +109,7 @@
             <span>Panel Dueño</span>
             <span id="owner-orders-badge" class="hidden bg-gold text-black text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
           </button>
-          <button onclick="logoutOwner()" class="text-xs text-neutral-400 hover:text-white border border-white/10 px-2.5 py-1.5 rounded transition" title="Cerrar sesión">
+          <button onclick="logoutUser()" class="text-xs text-neutral-400 hover:text-white border border-white/10 px-2.5 py-1.5 rounded transition" title="Cerrar sesión">
             Salir
           </button>
         </div>
@@ -186,40 +194,70 @@
       </div>
       <div class="flex items-center gap-4">
         <a id="footer-wa-contact" href="#" target="_blank" class="hover:text-gold transition">Contacto WhatsApp</a>
-        <button id="footer-login-link" onclick="openLoginModal()" class="hover:text-white transition">Acceso Administrador</button>
+        <button id="footer-login-link" onclick="openAuthModal('login')" class="hover:text-white transition">Iniciar sesión</button>
       </div>
     </div>
   </footer>
 
-  <!-- MODAL: Iniciar Sesión Dueño (Sin correos ni pistas visibles) -->
+  <!-- MODAL: Iniciar Sesión / Crear Cuenta -->
   <div id="login-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-[#080808] border border-gold rounded-lg max-w-sm w-full p-6">
       <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-5">
-        <div>
-          <span class="text-[10px] uppercase tracking-[0.25em] text-gold block">Área Privada</span>
-          <h3 class="font-display text-base tracking-wider text-white mt-0.5">INICIAR SESIÓN</h3>
-        </div>
+        <h3 id="auth-modal-title" class="font-display text-base tracking-wider text-white">INICIAR SESIÓN</h3>
         <button onclick="closeLoginModal()" class="text-neutral-500 hover:text-white text-sm">✕</button>
       </div>
 
-      <form onsubmit="handleOwnerLogin(event)" autocomplete="off" class="space-y-4">
+      <!-- Formulario Iniciar Sesión -->
+      <form id="login-form-view" onsubmit="handleLogin(event)" autocomplete="off" class="space-y-4">
         <div>
-          <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Correo de Administrador</label>
-          <input id="login-email" type="email" required autocomplete="off" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+          <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Correo electrónico</label>
+          <input id="login-email" type="email" required autocomplete="off" placeholder="tu@correo.com" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
         </div>
         <div>
           <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Contraseña</label>
-          <input id="login-password" type="password" required autocomplete="new-password" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+          <input id="login-password" type="password" required autocomplete="new-password" placeholder="••••••••" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
         </div>
         <p id="login-error" class="hidden text-xs text-red-400">Correo o contraseña incorrectos.</p>
         <button type="submit" class="w-full bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest py-2.5 rounded transition">
-          Entrar al Panel
+          Iniciar sesión
         </button>
+        <p class="text-center text-xs text-neutral-400 pt-1">
+          ¿No tienes cuenta?
+          <button type="button" onclick="toggleAuthMode('register')" class="text-gold hover:underline font-medium ml-1">
+            Crear cuenta
+          </button>
+        </p>
+      </form>
+
+      <!-- Formulario Crear Cuenta (Clientes sin acceso al panel) -->
+      <form id="register-form-view" onsubmit="handleRegister(event)" autocomplete="off" class="hidden space-y-4">
+        <div>
+          <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Nombre completo</label>
+          <input id="reg-name" type="text" required placeholder="Ej. Luis Martínez" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Correo electrónico</label>
+          <input id="reg-email" type="email" required autocomplete="off" placeholder="tu@correo.com" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Contraseña</label>
+          <input id="reg-password" type="password" minlength="6" required autocomplete="new-password" placeholder="Mínimo 6 caracteres" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
+        </div>
+        <p id="register-error" class="hidden text-xs text-red-400"></p>
+        <button type="submit" class="w-full bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest py-2.5 rounded transition">
+          Crear cuenta
+        </button>
+        <p class="text-center text-xs text-neutral-400 pt-1">
+          ¿Ya tienes cuenta?
+          <button type="button" onclick="toggleAuthMode('login')" class="text-gold hover:underline font-medium ml-1">
+            Iniciar sesión
+          </button>
+        </p>
       </form>
     </div>
   </div>
 
-  <!-- MODAL: Panel del Dueño (Solo accesible tras iniciar sesión) -->
+  <!-- MODAL: Panel del Dueño (Solo accesible para dxnzzventas@gmail.com) -->
   <div id="owner-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
     <div class="bg-[#080808] border border-gold rounded-lg max-w-3xl w-full p-5 sm:p-6 my-auto max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
@@ -239,7 +277,7 @@
           Pedidos Recibidos (<span id="tab-orders-count">0</span>)
         </button>
         <button id="tab-btn-settings" onclick="switchOwnerTab('settings')" class="text-xs px-4 py-2 rounded border border-white/15 text-neutral-300 hover:border-gold transition">
-          Pagos, WhatsApp y Cuenta
+          Pagos y WhatsApp
         </button>
       </div>
 
@@ -311,7 +349,7 @@
         <div id="owner-orders-list" class="space-y-3"></div>
       </div>
 
-      <!-- TAB 3: Configuración Pagos, WhatsApp y Cuenta -->
+      <!-- TAB 3: Configuración Pagos y WhatsApp -->
       <div id="owner-tab-settings" class="hidden space-y-6">
         <form onsubmit="saveOwnerSettings(event)" class="space-y-5">
           <div class="bg-black border border-white/10 rounded-lg p-4 space-y-4">
@@ -326,20 +364,6 @@
               <p class="text-[11px] text-neutral-500 mt-1.5 leading-relaxed">
                 Cuando el cliente pague en tu enlace de Mercado Pago o Stripe, la plataforma verifica fondos reales con el banco, deposita el dinero en tu cuenta y envía una notificación push directa a tu celular.
               </p>
-            </div>
-          </div>
-
-          <div class="bg-black border border-white/10 rounded-lg p-4 space-y-4">
-            <h4 class="text-xs uppercase tracking-widest text-gold font-semibold">Credenciales de Acceso del Dueño</h4>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-[11px] text-neutral-400 mb-1">Correo de Administrador</label>
-                <input id="set-admin-email" type="email" required class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
-              </div>
-              <div>
-                <label class="block text-[11px] text-neutral-400 mb-1">Nueva Contraseña</label>
-                <input id="set-admin-pass" type="text" required class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
-              </div>
             </div>
           </div>
 
@@ -448,27 +472,39 @@
   </div>
 
   <script>
+    // Credenciales exclusivas del propietario del panel
+    const OWNER_EMAIL = 'dxnzzventas@gmail.com';
+    const OWNER_PASS = 'Alvarez0707';
+
     // Estado en LocalStorage
     const STORAGE_KEYS = {
       PRODUCTS: 'dxnzz_store_products_v4',
       ORDERS: 'dxnzz_store_orders_v4',
       REVIEWS: 'dxnzz_store_reviews_v4',
       SETTINGS: 'dxnzz_store_settings_v4',
-      SESSION: 'dxnzz_store_owner_session_v4'
+      USERS: 'dxnzz_store_users_v4',
+      SESSION: 'dxnzz_store_session_v4'
     };
 
     const DEFAULT_SETTINGS = {
       waNumber: '5213300000000',
-      paymentLink: 'https://link.mercadopago.com.mx/',
-      adminEmail: 'admin@dxnzzstore.com',
-      adminPass: 'dxnzz2026'
+      paymentLink: 'https://link.mercadopago.com.mx/'
     };
 
     let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
     let orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || [];
     let reviews = JSON.parse(localStorage.getItem(STORAGE_KEYS.REVIEWS)) || [];
     let settings = { ...DEFAULT_SETTINGS, ...(JSON.parse(localStorage.getItem(STORAGE_KEYS.SETTINGS)) || {}) };
-    let isOwnerLoggedIn = sessionStorage.getItem(STORAGE_KEYS.SESSION) === 'true';
+    let registeredUsers = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)) || [];
+    let currentSession = JSON.parse(sessionStorage.getItem(STORAGE_KEYS.SESSION)) || null;
+
+    let isOwnerLoggedIn = Boolean(
+      currentSession &&
+      currentSession.email &&
+      currentSession.email.toLowerCase() === OWNER_EMAIL.toLowerCase() &&
+      currentSession.role === 'owner'
+    );
+
     let cart = [];
     let uploadedBase64Image = '';
 
@@ -481,34 +517,58 @@
       updateFooterLinks();
     });
 
-    // Control de Sesión del Dueño
+    // Control de Sesión y Cuentas
     function updateAuthUI() {
       const loginBtn = document.getElementById('btn-login-open');
+      const userControls = document.getElementById('user-header-controls');
+      const userBadge = document.getElementById('user-display-badge');
       const ownerControls = document.getElementById('owner-header-controls');
       const emptyAddBtn = document.getElementById('owner-empty-add-btn');
       const footerLoginLink = document.getElementById('footer-login-link');
 
+      isOwnerLoggedIn = Boolean(
+        currentSession &&
+        currentSession.email &&
+        currentSession.email.toLowerCase() === OWNER_EMAIL.toLowerCase() &&
+        currentSession.role === 'owner'
+      );
+
       if (isOwnerLoggedIn) {
         loginBtn.classList.add('hidden');
+        userControls.classList.add('hidden');
         ownerControls.classList.remove('hidden');
         if (emptyAddBtn) emptyAddBtn.classList.remove('hidden');
         footerLoginLink.textContent = 'Panel Dueño';
         footerLoginLink.onclick = () => openOwnerPanel('products');
         updateOrdersBadge();
+      } else if (currentSession) {
+        loginBtn.classList.add('hidden');
+        ownerControls.classList.add('hidden');
+        userControls.classList.remove('hidden');
+        userBadge.textContent = currentSession.name || currentSession.email;
+        if (emptyAddBtn) emptyAddBtn.classList.add('hidden');
+        footerLoginLink.textContent = currentSession.email;
+        footerLoginLink.onclick = null;
       } else {
         loginBtn.classList.remove('hidden');
+        userControls.classList.add('hidden');
         ownerControls.classList.add('hidden');
         if (emptyAddBtn) emptyAddBtn.classList.add('hidden');
-        footerLoginLink.textContent = 'Acceso Administrador';
-        footerLoginLink.onclick = openLoginModal;
+        footerLoginLink.textContent = 'Iniciar sesión';
+        footerLoginLink.onclick = () => openAuthModal('login');
       }
       renderReviews();
     }
 
-    function openLoginModal() {
+    function openAuthModal(mode = 'login') {
       document.getElementById('login-email').value = '';
       document.getElementById('login-password').value = '';
+      document.getElementById('reg-name').value = '';
+      document.getElementById('reg-email').value = '';
+      document.getElementById('reg-password').value = '';
       document.getElementById('login-error').classList.add('hidden');
+      document.getElementById('register-error').classList.add('hidden');
+      toggleAuthMode(mode);
       document.getElementById('login-modal').classList.remove('hidden');
     }
 
@@ -516,23 +576,111 @@
       document.getElementById('login-modal').classList.add('hidden');
     }
 
-    function handleOwnerLogin(e) {
+    function toggleAuthMode(mode) {
+      const title = document.getElementById('auth-modal-title');
+      const loginForm = document.getElementById('login-form-view');
+      const regForm = document.getElementById('register-form-view');
+      document.getElementById('login-error').classList.add('hidden');
+      document.getElementById('register-error').classList.add('hidden');
+
+      if (mode === 'register') {
+        title.textContent = 'CREAR CUENTA';
+        loginForm.classList.add('hidden');
+        regForm.classList.remove('hidden');
+      } else {
+        title.textContent = 'INICIAR SESIÓN';
+        regForm.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+      }
+    }
+
+    function handleLogin(e) {
       e.preventDefault();
       const email = document.getElementById('login-email').value.trim().toLowerCase();
       const pass = document.getElementById('login-password').value;
 
-      if (email === settings.adminEmail.toLowerCase() && pass === settings.adminPass) {
-        isOwnerLoggedIn = true;
-        sessionStorage.setItem(STORAGE_KEYS.SESSION, 'true');
+      // Validar acceso exclusivo del propietario al panel
+      if (email === OWNER_EMAIL.toLowerCase() && pass === OWNER_PASS) {
+        currentSession = {
+          email: OWNER_EMAIL,
+          name: 'Dxnzz',
+          role: 'owner'
+        };
+        sessionStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(currentSession));
         closeLoginModal();
         updateAuthUI();
         openOwnerPanel('products');
+        return;
+      }
+
+      // Validar cuentas creadas por clientes (sin acceso al panel)
+      const matchedUser = registeredUsers.find(
+        u => u.email.toLowerCase() === email && u.password === pass
+      );
+
+      if (matchedUser) {
+        currentSession = {
+          email: matchedUser.email,
+          name: matchedUser.name,
+          role: 'customer'
+        };
+        sessionStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(currentSession));
+        const nameInput = document.getElementById('cust-name');
+        if (nameInput && !nameInput.value) nameInput.value = matchedUser.name;
+        closeLoginModal();
+        updateAuthUI();
       } else {
         document.getElementById('login-error').classList.remove('hidden');
       }
     }
 
-    function logoutOwner() {
+    function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim().toLowerCase();
+      const password = document.getElementById('reg-password').value;
+      const errorEl = document.getElementById('register-error');
+
+      if (!name || !email || password.length < 6) {
+        errorEl.textContent = 'Completa todos los campos (contraseña de mínimo 6 caracteres).';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      // Evitar que una cuenta creada suplante el rol de dueño
+      if (email === OWNER_EMAIL.toLowerCase()) {
+        errorEl.textContent = 'Este correo ya está reservado.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      const exists = registeredUsers.some(u => u.email.toLowerCase() === email);
+      if (exists) {
+        errorEl.textContent = 'Ya existe una cuenta registrada con este correo.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      const newUser = { name, email, password, role: 'customer' };
+      registeredUsers.push(newUser);
+      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(registeredUsers));
+
+      currentSession = {
+        email: newUser.email,
+        name: newUser.name,
+        role: 'customer'
+      };
+      sessionStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(currentSession));
+
+      const nameInput = document.getElementById('cust-name');
+      if (nameInput && !nameInput.value) nameInput.value = newUser.name;
+
+      closeLoginModal();
+      updateAuthUI();
+    }
+
+    function logoutUser() {
+      currentSession = null;
       isOwnerLoggedIn = false;
       sessionStorage.removeItem(STORAGE_KEYS.SESSION);
       closeOwnerPanel();
@@ -542,7 +690,7 @@
     // Panel Dueño
     function openOwnerPanel(tab = 'products') {
       if (!isOwnerLoggedIn) {
-        openLoginModal();
+        openAuthModal('login');
         return;
       }
       document.getElementById('owner-modal').classList.remove('hidden');
@@ -953,8 +1101,6 @@
     function loadSettingsForm() {
       document.getElementById('set-wa-number').value = settings.waNumber || '';
       document.getElementById('set-payment-link').value = settings.paymentLink || '';
-      document.getElementById('set-admin-email').value = settings.adminEmail || '';
-      document.getElementById('set-admin-pass').value = settings.adminPass || '';
     }
 
     function saveOwnerSettings(e) {
@@ -962,8 +1108,6 @@
       if (!isOwnerLoggedIn) return;
       settings.waNumber = document.getElementById('set-wa-number').value.trim();
       settings.paymentLink = document.getElementById('set-payment-link').value.trim();
-      settings.adminEmail = document.getElementById('set-admin-email').value.trim();
-      settings.adminPass = document.getElementById('set-admin-pass').value;
       localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
       updateFooterLinks();
       alert('Configuración guardada correctamente.');
