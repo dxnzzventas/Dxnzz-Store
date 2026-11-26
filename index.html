@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="google-site-verification" content="09ksKIstJLDyFRB6Ega0lmu_wTK6OR1e9XJUNac7uGo" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dxnzz Store — Gorras Exclusivas</title>
@@ -81,18 +80,22 @@
 
   <!-- Header -->
   <header class="sticky top-0 z-40 bg-black/95 backdrop-blur-md border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <a href="#" class="flex items-center group focus:outline-none" aria-label="Dxnzz Store">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
+      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none min-w-0" aria-label="Dxnzz Store">
         <img
           src="Logo.png"
           alt="DS Monogram"
-          class="brand-logo-img h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          class="brand-logo-img h-11 sm:h-12 w-auto object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
         />
+        <div class="min-w-0">
+          <span class="font-display text-sm sm:text-lg tracking-[0.14em] sm:tracking-[0.18em] text-white font-semibold block leading-none truncate">DXNZZ STORE</span>
+          <span class="text-[8px] sm:text-[9px] tracking-[0.26em] text-gold uppercase block mt-1">Headwear</span>
+        </div>
       </a>
 
-      <div class="flex items-center gap-2 sm:gap-3">
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         <!-- Botón visible cuando NO hay sesión iniciada -->
-        <button id="btn-login-open" onclick="openAuthModal('login')" class="text-xs text-neutral-400 hover:text-white border border-white/10 hover:border-white/25 px-3 py-1.5 rounded transition">
+        <button id="btn-login-open" onclick="openAuthModal('login')" class="text-xs text-neutral-400 hover:text-white border border-white/10 hover:border-white/25 px-2.5 sm:px-3 py-1.5 rounded transition">
           Iniciar sesión
         </button>
 
@@ -106,7 +109,7 @@
 
         <!-- Controles visibles SOLO cuando el dueño inició sesión -->
         <div id="owner-header-controls" class="hidden flex items-center gap-2">
-          <button onclick="openOwnerPanel('products')" class="relative text-xs bg-black border border-gold text-gold hover:bg-gold hover:text-black px-3 py-1.5 rounded font-medium transition flex items-center gap-1.5">
+          <button onclick="openOwnerPanel('products')" class="relative text-xs bg-black border border-gold text-gold hover:bg-gold hover:text-black px-2.5 sm:px-3 py-1.5 rounded font-medium transition flex items-center gap-1.5">
             <span>Panel Dueño</span>
             <span id="owner-orders-badge" class="hidden bg-gold text-black text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
           </button>
@@ -116,7 +119,7 @@
         </div>
 
         <!-- Carrito -->
-        <button onclick="openCartModal()" class="relative bg-white text-black hover:bg-gold hover:text-black px-3.5 py-1.5 rounded text-xs font-semibold tracking-wide transition flex items-center gap-2">
+        <button onclick="openCartModal()" class="relative bg-white text-black hover:bg-gold hover:text-black px-3 sm:px-3.5 py-1.5 rounded text-xs font-semibold tracking-wide transition flex items-center gap-1.5 sm:gap-2">
           <span>Bolsa</span>
           <span id="cart-count" class="bg-black text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
         </button>
