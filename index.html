@@ -8,6 +8,12 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://dxnzzventas.github.io/" />
   <link rel="icon" type="image/png" href="Logo.png" />
+    <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Dxnzz Store" />
+  <link rel="apple-touch-icon" href="Logo.png" />
 
   <!-- Vista previa al compartir en WhatsApp, TikTok y redes -->
   <meta property="og:type" content="website" />
@@ -209,6 +215,7 @@
       </div>
       <div class="flex items-center gap-4">
         <a id="footer-wa-contact" href="#" target="_blank" class="hover:text-gold transition">Contacto WhatsApp</a>
+          <a href="privacidad.html" class="hover:text-gold transition">Privacidad</a>
         <button id="footer-login-link" onclick="openAuthModal('login')" class="hover:text-white transition">Iniciar sesión</button>
       </div>
     </div>
@@ -1363,6 +1370,13 @@
           </div>
         </div>
       `).join('');
+    }
+  </script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
     }
   </script>
 </body>
