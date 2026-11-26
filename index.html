@@ -4,10 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dxnzz Store — Gorras Exclusivas</title>
+  <meta name="description" content="Dxnzz Store — Gorras exclusivas en negro y dorado. Compra directa con pago en línea y atención personalizada." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://dxnzzventas.github.io/" />
+  <link rel="icon" type="image/png" href="Logo.png" />
+
+  <!-- Vista previa al compartir en WhatsApp, TikTok y redes -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dxnzz Store — Gorras Exclusivas" />
+  <meta property="og:description" content="Compra directa con pago en línea y atención personalizada." />
+  <meta property="og:image" content="https://dxnzzventas.github.io/Logo.png" />
+  <meta property="og:url" content="https://dxnzzventas.github.io/" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Firebase SDK (Base de datos en vivo) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -57,7 +72,7 @@
 </head>
 <body class="bg-black text-white min-h-screen flex flex-col selection:bg-gold selection:text-black">
 
-  <!-- Barra de Notificación Rápida (Solo visible en sesión de dueño al recibir pedido) -->
+  <!-- Barra de Notificación Rápida (Solo visible en sesión de dueño al recibir pedido en vivo) -->
   <div id="owner-alert-banner" class="hidden fixed top-4 right-4 z-50 max-w-sm w-full bg-[#080808] border border-gold shadow-2xl rounded-lg p-4 transition-all">
     <div class="flex items-start justify-between gap-3">
       <div>
@@ -80,46 +95,46 @@
 
   <!-- Header -->
   <header class="sticky top-0 z-40 bg-black/95 backdrop-blur-md border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
-      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none min-w-0" aria-label="Dxnzz Store">
+    <div class="max-w-6xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
+      <a href="#" class="flex items-center gap-2 sm:gap-3 group focus:outline-none shrink-0" aria-label="Dxnzz Store">
         <img
           src="Logo.png"
           alt="DS Monogram"
-          class="brand-logo-img h-11 sm:h-12 w-auto object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
+          class="brand-logo-img h-10 sm:h-12 w-auto object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
         />
-        <div class="min-w-0">
-          <span class="font-display text-sm sm:text-lg tracking-[0.14em] sm:tracking-[0.18em] text-white font-semibold block leading-none truncate">DXNZZ STORE</span>
-          <span class="text-[8px] sm:text-[9px] tracking-[0.26em] text-gold uppercase block mt-1">Headwear</span>
+        <div>
+          <span class="font-display text-xs sm:text-lg tracking-[0.12em] sm:tracking-[0.18em] text-white font-semibold block leading-none">DXNZZ STORE</span>
+          <span class="text-[8px] sm:text-[9px] tracking-[0.24em] text-gold uppercase block mt-1">Headwear</span>
         </div>
       </a>
 
-      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+      <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
         <!-- Botón visible cuando NO hay sesión iniciada -->
-        <button id="btn-login-open" onclick="openAuthModal('login')" class="text-xs text-neutral-400 hover:text-white border border-white/10 hover:border-white/25 px-2.5 sm:px-3 py-1.5 rounded transition">
+        <button id="btn-login-open" onclick="openAuthModal('login')" class="text-[11px] sm:text-xs text-neutral-400 hover:text-white border border-white/10 hover:border-white/25 px-2.5 sm:px-3 py-1.5 rounded transition">
           Iniciar sesión
         </button>
 
         <!-- Estado cuando un usuario estándar (NO dueño) inició sesión -->
-        <div id="user-header-controls" class="hidden flex items-center gap-2">
+        <div id="user-header-controls" class="hidden flex items-center gap-1.5 sm:gap-2">
           <span id="user-display-badge" class="hidden sm:inline-block text-[11px] text-neutral-300 bg-[#0A0A0A] border border-white/10 px-2.5 py-1 rounded truncate max-w-[160px]"></span>
-          <button onclick="logoutUser()" class="text-xs text-neutral-400 hover:text-white border border-white/10 px-2.5 py-1.5 rounded transition" title="Cerrar sesión">
+          <button onclick="logoutUser()" class="text-[11px] sm:text-xs text-neutral-400 hover:text-white border border-white/10 px-2 sm:px-2.5 py-1.5 rounded transition" title="Cerrar sesión">
             Salir
           </button>
         </div>
 
         <!-- Controles visibles SOLO cuando el dueño inició sesión -->
-        <div id="owner-header-controls" class="hidden flex items-center gap-2">
-          <button onclick="openOwnerPanel('products')" class="relative text-xs bg-black border border-gold text-gold hover:bg-gold hover:text-black px-2.5 sm:px-3 py-1.5 rounded font-medium transition flex items-center gap-1.5">
-            <span>Panel Dueño</span>
-            <span id="owner-orders-badge" class="hidden bg-gold text-black text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
+        <div id="owner-header-controls" class="hidden flex items-center gap-1.5 sm:gap-2">
+          <button onclick="openOwnerPanel('products')" class="relative text-[11px] sm:text-xs bg-black border border-gold text-gold hover:bg-gold hover:text-black px-2 sm:px-3 py-1.5 rounded font-medium transition flex items-center gap-1">
+            <span>Panel</span>
+            <span id="owner-orders-badge" class="hidden bg-gold text-black text-[10px] font-bold px-1.5 rounded-full">0</span>
           </button>
-          <button onclick="logoutUser()" class="text-xs text-neutral-400 hover:text-white border border-white/10 px-2.5 py-1.5 rounded transition" title="Cerrar sesión">
+          <button onclick="logoutUser()" class="text-[11px] sm:text-xs text-neutral-400 hover:text-white border border-white/10 px-2 sm:px-2.5 py-1.5 rounded transition" title="Cerrar sesión">
             Salir
           </button>
         </div>
 
         <!-- Carrito -->
-        <button onclick="openCartModal()" class="relative bg-white text-black hover:bg-gold hover:text-black px-3 sm:px-3.5 py-1.5 rounded text-xs font-semibold tracking-wide transition flex items-center gap-1.5 sm:gap-2">
+        <button onclick="openCartModal()" class="relative bg-white text-black hover:bg-gold hover:text-black px-2.5 sm:px-3.5 py-1.5 rounded text-[11px] sm:text-xs font-semibold tracking-wide transition flex items-center gap-1.5">
           <span>Bolsa</span>
           <span id="cart-count" class="bg-black text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
         </button>
@@ -143,20 +158,18 @@
     </div>
   </section>
 
-  <!-- Sección Nuestras Gorras (Sin opciones de filtro) -->
+  <!-- Sección Nuestras Gorras -->
   <main id="catalogo" class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-12 sm:py-16">
     <div class="flex items-end justify-between border-b border-white/10 pb-4 mb-8">
       <div>
         <span class="text-[10px] uppercase tracking-[0.28em] text-gold block">Catálogo Oficial</span>
         <h2 class="font-display text-xl sm:text-2xl tracking-[0.12em] text-white mt-1">NUESTRAS GORRAS</h2>
       </div>
-      <span id="catalog-count-label" class="text-xs text-neutral-500">0 modelos</span>
+      <span id="catalog-count-label" class="text-xs text-neutral-500">Cargando...</span>
     </div>
 
     <!-- Grid de Productos -->
-    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Renderizado dinámico -->
-    </div>
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
     <!-- Estado vacío -->
     <div id="empty-catalog-state" class="hidden text-center py-16 border border-white/10 rounded-lg bg-[#050505]">
@@ -179,9 +192,7 @@
         </button>
       </div>
 
-      <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <!-- Renderizado dinámico -->
-      </div>
+      <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
       <p id="empty-reviews-msg" class="text-xs text-neutral-500 py-6 text-center border border-white/5 rounded-lg">
         Sé el primero en compartir tu experiencia con tu gorra de Dxnzz Store.
       </p>
@@ -211,7 +222,6 @@
         <button onclick="closeLoginModal()" class="text-neutral-500 hover:text-white text-sm">✕</button>
       </div>
 
-      <!-- Formulario Iniciar Sesión -->
       <form id="login-form-view" onsubmit="handleLogin(event)" autocomplete="off" class="space-y-4">
         <div>
           <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Correo electrónico</label>
@@ -233,7 +243,6 @@
         </p>
       </form>
 
-      <!-- Formulario Crear Cuenta (Clientes sin acceso al panel) -->
       <form id="register-form-view" onsubmit="handleRegister(event)" autocomplete="off" class="hidden space-y-4">
         <div>
           <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1.5">Nombre completo</label>
@@ -261,18 +270,17 @@
     </div>
   </div>
 
-  <!-- MODAL: Panel del Dueño (Solo accesible para dxnzzventas@gmail.com) -->
+  <!-- MODAL: Panel del Dueño -->
   <div id="owner-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
     <div class="bg-[#080808] border border-gold rounded-lg max-w-3xl w-full p-5 sm:p-6 my-auto max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
         <div>
-          <span class="text-[10px] uppercase tracking-[0.25em] text-gold block">Administración</span>
+          <span class="text-[10px] uppercase tracking-[0.25em] text-gold block">Administración en Vivo</span>
           <h3 class="font-display text-lg tracking-wider text-white">PANEL DXNZZ STORE</h3>
         </div>
         <button onclick="closeOwnerPanel()" class="text-neutral-400 hover:text-white text-sm px-2 py-1">✕</button>
       </div>
 
-      <!-- Navegación de Pestañas del Dueño -->
       <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4 mb-6">
         <button id="tab-btn-products" onclick="switchOwnerTab('products')" class="text-xs px-4 py-2 rounded border border-gold bg-gold text-black font-semibold transition">
           Productos y Precios
@@ -329,15 +337,14 @@
 
           <div id="image-preview-wrapper" class="hidden flex items-center gap-3 pt-1">
             <img id="image-preview" src="" alt="Vista previa" class="w-16 h-16 object-cover rounded border border-gold bg-black" />
-            <span class="text-[11px] text-neutral-400">Vista previa de la foto</span>
+            <span class="text-[11px] text-neutral-400">Vista previa optimizada</span>
           </div>
 
-          <button type="submit" class="bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest px-5 py-2.5 rounded transition">
-            Guardar Producto
+          <button id="save-product-btn" type="submit" class="bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest px-5 py-2.5 rounded transition">
+            Publicar en Vivo
           </button>
         </form>
 
-        <!-- Lista de Productos Publicados -->
         <div>
           <h4 class="text-xs uppercase tracking-widest text-neutral-400 mb-3">Gorras Publicadas</h4>
           <div id="owner-products-list" class="space-y-2.5"></div>
@@ -347,7 +354,7 @@
       <!-- TAB 2: Pedidos Recibidos -->
       <div id="owner-tab-orders" class="hidden space-y-4">
         <div class="flex items-center justify-between">
-          <p class="text-xs text-neutral-400">Aquí aparecen los pedidos con el número de teléfono del cliente para contactarlo al instante.</p>
+          <p class="text-xs text-neutral-400">Los pedidos de tus clientes aparecen aquí al instante.</p>
           <button onclick="clearAllOrders()" class="text-[11px] text-neutral-500 hover:text-red-400 transition">Limpiar historial</button>
         </div>
         <div id="owner-orders-list" class="space-y-3"></div>
@@ -365,9 +372,6 @@
             <div>
               <label class="block text-[11px] text-neutral-400 mb-1">Enlace de Pago con Tarjeta (Mercado Pago / Stripe)</label>
               <input id="set-payment-link" type="url" placeholder="https://link.mercadopago.com.mx/tu-enlace" class="w-full bg-[#0A0A0A] border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none" />
-              <p class="text-[11px] text-neutral-500 mt-1.5 leading-relaxed">
-                Cuando el cliente pague en tu enlace de Mercado Pago o Stripe, la plataforma verifica fondos reales con el banco, deposita el dinero en tu cuenta y envía una notificación push directa a tu celular.
-              </p>
             </div>
           </div>
 
@@ -391,10 +395,8 @@
           <button onclick="closeCartModal()" class="text-neutral-400 hover:text-white text-sm">✕</button>
         </div>
 
-        <!-- Lista de items -->
         <div id="cart-items-container" class="divide-y divide-white/10 my-4 max-h-60 overflow-y-auto"></div>
 
-        <!-- Formulario de Cliente y Pago -->
         <div id="checkout-form-section" class="hidden border-t border-white/10 pt-4 space-y-3.5">
           <h4 class="text-xs uppercase tracking-widest text-gold font-semibold">Datos para Entrega y Contacto</h4>
           <div>
@@ -418,11 +420,10 @@
           </div>
         </div>
 
-        <!-- Confirmación de Pedido Realizado -->
         <div id="order-success-box" class="hidden border border-gold bg-black rounded-lg p-4 mt-4 space-y-3">
           <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-semibold block">Pedido Registrado</span>
           <p class="text-xs text-neutral-300 leading-relaxed">
-            Tu pedido quedó registrado con tu número de contacto. Completa el pago con tarjeta o envía el comprobante directo por WhatsApp para confirmar tu envío.
+            Tu pedido quedó registrado en vivo. Completa el pago con tarjeta o envía el comprobante directo por WhatsApp para confirmar tu envío.
           </p>
           <div class="space-y-2 pt-1">
             <a id="checkout-pay-card-btn" href="#" target="_blank" class="block w-full text-center bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-wider py-2.5 rounded transition">
@@ -435,7 +436,6 @@
         </div>
       </div>
 
-      <!-- Total y Botón Finalizar -->
       <div id="cart-footer" class="border-t border-white/10 pt-4 mt-4">
         <div class="flex items-center justify-between text-sm mb-4">
           <span class="text-neutral-400">Total a pagar</span>
@@ -489,11 +489,29 @@
   </div>
 
   <script>
+    // Configuración de Firebase Realtime Database (Sincronización en vivo)
+    const FIREBASE_CONFIG = {
+      apiKey: "AIzaSyAx8UNhWU4XG2B0dAw2-CzcIV6ktUNGOrs",
+      authDomain: "dxnzz-store.firebaseapp.com",
+      databaseURL: "https://dxnzz-store-default-rtdb.firebaseio.com",
+      projectId: "dxnzz-store",
+      storageBucket: "dxnzz-store.firebasestorage.app",
+      messagingSenderId: "929877980520",
+      appId: "1:929877980520:web:bdb4f2010a368f6a5d12dd",
+      measurementId: "G-4PJYCWEV9L"
+    };
+
+    const isFirebaseConfigured = Boolean(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.databaseURL);
+    let db = null;
+    if (isFirebaseConfigured && typeof firebase !== "undefined") {
+      firebase.initializeApp(FIREBASE_CONFIG);
+      db = firebase.database();
+    }
+
     // Credenciales exclusivas del propietario del panel
     const OWNER_EMAIL = 'dxnzzventas@gmail.com';
     const OWNER_PASS = 'Alvarez0707';
 
-    // Estado en LocalStorage
     const STORAGE_KEYS = {
       PRODUCTS: 'dxnzz_store_products_v4',
       ORDERS: 'dxnzz_store_orders_v4',
@@ -525,14 +543,59 @@
     let cart = [];
     let uploadedBase64Image = '';
     let selectedReviewRating = 5;
+    let initialOrdersLoaded = false;
 
-    // Inicialización
+    // Inicialización y escucha en tiempo real
     document.addEventListener('DOMContentLoaded', () => {
       updateAuthUI();
       renderProducts();
       renderReviews();
       renderCart();
       updateFooterLinks();
+
+      if (db) {
+        // Escuchar catálogo en vivo para todos los visitantes
+        db.ref('products').on('value', (snap) => {
+          const data = snap.val();
+          products = data ? Object.values(data).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)) : [];
+          renderProducts();
+          if (isOwnerLoggedIn) renderOwnerProducts();
+        });
+
+        // Escuchar reseñas en vivo
+        db.ref('reviews').on('value', (snap) => {
+          const data = snap.val();
+          reviews = data ? Object.values(data).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)) : [];
+          renderReviews();
+        });
+
+        // Escuchar configuración de WhatsApp y enlace de pago en vivo
+        db.ref('settings').on('value', (snap) => {
+          const data = snap.val();
+          if (data) {
+            settings = { ...DEFAULT_SETTINGS, ...data };
+            updateFooterLinks();
+          }
+        });
+
+        // Escuchar cuentas registradas en vivo
+        db.ref('users').on('value', (snap) => {
+          const data = snap.val();
+          registeredUsers = data ? Object.values(data) : [];
+        });
+
+        // Escuchar pedidos en vivo y notificar al dueño al instante
+        db.ref('orders').on('value', (snap) => {
+          const data = snap.val();
+          const incoming = data ? Object.values(data).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)) : [];
+          if (initialOrdersLoaded && incoming.length > orders.length && isOwnerLoggedIn) {
+            triggerOwnerNotification(incoming[0]);
+          }
+          orders = incoming;
+          initialOrdersLoaded = true;
+          if (isOwnerLoggedIn) renderOwnerOrders();
+        });
+      }
     });
 
     // Control de Sesión y Cuentas
@@ -617,13 +680,8 @@
       const email = document.getElementById('login-email').value.trim().toLowerCase();
       const pass = document.getElementById('login-password').value;
 
-      // Validar acceso exclusivo del propietario al panel
       if (email === OWNER_EMAIL.toLowerCase() && pass === OWNER_PASS) {
-        currentSession = {
-          email: OWNER_EMAIL,
-          name: 'Dxnzz',
-          role: 'owner'
-        };
+        currentSession = { email: OWNER_EMAIL, name: 'Dxnzz', role: 'owner' };
         sessionStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(currentSession));
         closeLoginModal();
         updateAuthUI();
@@ -631,17 +689,12 @@
         return;
       }
 
-      // Validar cuentas creadas por clientes (sin acceso al panel)
       const matchedUser = registeredUsers.find(
         u => u.email.toLowerCase() === email && u.password === pass
       );
 
       if (matchedUser) {
-        currentSession = {
-          email: matchedUser.email,
-          name: matchedUser.name,
-          role: 'customer'
-        };
+        currentSession = { email: matchedUser.email, name: matchedUser.name, role: 'customer' };
         sessionStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(currentSession));
         const nameInput = document.getElementById('cust-name');
         if (nameInput && !nameInput.value) nameInput.value = matchedUser.name;
@@ -652,7 +705,7 @@
       }
     }
 
-    function handleRegister(e) {
+    async function handleRegister(e) {
       e.preventDefault();
       const name = document.getElementById('reg-name').value.trim();
       const email = document.getElementById('reg-email').value.trim().toLowerCase();
@@ -665,7 +718,6 @@
         return;
       }
 
-      // Evitar que una cuenta creada suplante el rol de dueño
       if (email === OWNER_EMAIL.toLowerCase()) {
         errorEl.textContent = 'Este correo ya está reservado.';
         errorEl.classList.remove('hidden');
@@ -679,15 +731,17 @@
         return;
       }
 
-      const newUser = { name, email, password, role: 'customer' };
-      registeredUsers.push(newUser);
-      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(registeredUsers));
+      const userId = 'usr_' + Date.now();
+      const newUser = { id: userId, name, email, password, role: 'customer' };
 
-      currentSession = {
-        email: newUser.email,
-        name: newUser.name,
-        role: 'customer'
-      };
+      if (db) {
+        await db.ref(`users/${userId}`).set(newUser);
+      } else {
+        registeredUsers.push(newUser);
+        localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(registeredUsers));
+      }
+
+      currentSession = { email: newUser.email, name: newUser.name, role: 'customer' };
       sessionStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(currentSession));
 
       const nameInput = document.getElementById('cust-name');
@@ -735,15 +789,36 @@
       activeBtn.classList.add('border-gold', 'bg-gold', 'text-black', 'font-semibold');
     }
 
-    // Gestión de Productos
+    // Comprimir foto automáticamente para subida rápida en vivo
     function previewUploadedImage(event) {
       const file = event.target.files[0];
       if (!file) return;
       const reader = new FileReader();
       reader.onload = function(e) {
-        uploadedBase64Image = e.target.result;
-        document.getElementById('image-preview').src = uploadedBase64Image;
-        document.getElementById('image-preview-wrapper').classList.remove('hidden');
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const maxSize = 900;
+          let width = img.width;
+          let height = img.height;
+          if (width > maxSize || height > maxSize) {
+            if (width > height) {
+              height = Math.round((height * maxSize) / width);
+              width = maxSize;
+            } else {
+              width = Math.round((width * maxSize) / height);
+              height = maxSize;
+            }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          uploadedBase64Image = canvas.toDataURL('image/jpeg', 0.82);
+          document.getElementById('image-preview').src = uploadedBase64Image;
+          document.getElementById('image-preview-wrapper').classList.remove('hidden');
+        };
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
@@ -756,7 +831,7 @@
       }
     }
 
-    function saveProduct(e) {
+    async function saveProduct(e) {
       e.preventDefault();
       if (!isOwnerLoggedIn) return;
 
@@ -773,26 +848,39 @@
         return;
       }
 
-      if (editId) {
-        const idx = products.findIndex(p => p.id === editId);
-        if (idx !== -1) {
-          products[idx] = { ...products[idx], name, price, stock, desc, image: finalImage };
-        }
-      } else {
-        products.unshift({
-          id: 'cap_' + Date.now(),
-          name,
-          price,
-          stock,
-          desc,
-          image: finalImage
-        });
-      }
+      const saveBtn = document.getElementById('save-product-btn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Publicando...';
 
-      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
-      resetProductForm();
-      renderProducts();
-      renderOwnerProducts();
+      try {
+        if (db) {
+          const id = editId || ('cap_' + Date.now());
+          const existing = products.find(p => p.id === id);
+          await db.ref(`products/${id}`).set({
+            id,
+            name,
+            price,
+            stock,
+            desc,
+            image: finalImage,
+            createdAt: existing ? existing.createdAt : Date.now()
+          });
+        } else {
+          if (editId) {
+            const idx = products.findIndex(p => p.id === editId);
+            if (idx !== -1) products[idx] = { ...products[idx], name, price, stock, desc, image: finalImage };
+          } else {
+            products.unshift({ id: 'cap_' + Date.now(), name, price, stock, desc, image: finalImage, createdAt: Date.now() });
+          }
+          localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+          renderProducts();
+          renderOwnerProducts();
+        }
+        resetProductForm();
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Publicar en Vivo';
+      }
     }
 
     function editProduct(id) {
@@ -811,12 +899,16 @@
       document.getElementById('cancel-edit-btn').classList.remove('hidden');
     }
 
-    function deleteProduct(id) {
+    async function deleteProduct(id) {
       if (!isOwnerLoggedIn) return;
-      products = products.filter(p => p.id !== id);
-      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
-      renderProducts();
-      renderOwnerProducts();
+      if (db) {
+        await db.ref(`products/${id}`).remove();
+      } else {
+        products = products.filter(p => p.id !== id);
+        localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+        renderProducts();
+        renderOwnerProducts();
+      }
     }
 
     function resetProductForm() {
@@ -845,7 +937,7 @@
             <img src="${p.image}" alt="${p.name}" class="w-12 h-12 object-cover rounded border border-white/10 shrink-0" />
             <div class="min-w-0">
               <p class="text-xs font-medium text-white truncate">${p.name}</p>
-              <p class="text-[11px] text-gold">$${p.price.toLocaleString('es-MX')} MXN · Stock: ${p.stock}</p>
+              <p class="text-[11px] text-gold">$${Number(p.price).toLocaleString('es-MX')} MXN · Stock: ${p.stock}</p>
             </div>
           </div>
           <div class="flex items-center gap-2 shrink-0">
@@ -888,7 +980,7 @@
           <div class="px-5 pb-5 pt-3 border-t border-white/5 flex items-center justify-between">
             <div>
               <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
-              <span class="text-base font-semibold text-gold">$${p.price.toLocaleString('es-MX')} <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
+              <span class="text-base font-semibold text-gold">$${Number(p.price).toLocaleString('es-MX')} <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
             </div>
             <button
               onclick="addToCart('${p.id}')"
@@ -965,7 +1057,7 @@
             <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded border border-white/10" />
             <div class="min-w-0">
               <p class="text-xs font-medium text-white truncate">${item.name}</p>
-              <p class="text-[11px] text-gold">$${item.price.toLocaleString('es-MX')} MXN</p>
+              <p class="text-[11px] text-gold">$${Number(item.price).toLocaleString('es-MX')} MXN</p>
             </div>
           </div>
           <div class="flex items-center gap-2">
@@ -985,7 +1077,7 @@
       document.getElementById('cart-modal').classList.add('hidden');
     }
 
-    function submitCustomerOrder() {
+    async function submitCustomerOrder() {
       if (cart.length === 0) return;
 
       const name = document.getElementById('cust-name').value.trim();
@@ -1000,16 +1092,10 @@
 
       const totalAmount = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
       const itemsSummary = cart.map(i => `${i.qty}x ${i.name}`).join(', ');
-
-      // Descontar stock
-      cart.forEach(item => {
-        const prod = products.find(p => p.id === item.id);
-        if (prod) prod.stock = Math.max(0, prod.stock - item.qty);
-      });
-      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+      const orderId = 'PED-' + Math.floor(1000 + Math.random() * 9000);
 
       const newOrder = {
-        id: 'PED-' + Math.floor(1000 + Math.random() * 9000),
+        id: orderId,
         customerName: name,
         customerPhone: phone,
         address,
@@ -1017,13 +1103,29 @@
         items: itemsSummary,
         total: totalAmount,
         status: 'Pendiente de pago',
-        date: new Date().toLocaleString('es-MX')
+        date: new Date().toLocaleString('es-MX'),
+        createdAt: Date.now()
       };
 
-      orders.unshift(newOrder);
-      localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(orders));
+      if (db) {
+        for (const item of cart) {
+          const prod = products.find(p => p.id === item.id);
+          if (prod) {
+            const nextStock = Math.max(0, prod.stock - item.qty);
+            await db.ref(`products/${prod.id}/stock`).set(nextStock);
+          }
+        }
+        await db.ref(`orders/${orderId}`).set(newOrder);
+      } else {
+        cart.forEach(item => {
+          const prod = products.find(p => p.id === item.id);
+          if (prod) prod.stock = Math.max(0, prod.stock - item.qty);
+        });
+        localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+        orders.unshift(newOrder);
+        localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(orders));
+      }
 
-      // Construir mensaje de WhatsApp para el dueño
       const waText = encodeURIComponent(
         `Hola Dxnzz Store, acabo de hacer un pedido (${newOrder.id}):\n` +
         `• Nombre: ${name}\n` +
@@ -1044,8 +1146,7 @@
       renderCart();
       document.getElementById('order-success-box').classList.remove('hidden');
 
-      // Mostrar alerta instantánea si el dueño tiene sesión abierta
-      if (isOwnerLoggedIn) {
+      if (isOwnerLoggedIn && !db) {
         updateOrdersBadge();
         triggerOwnerNotification(newOrder);
       }
@@ -1054,7 +1155,7 @@
     function triggerOwnerNotification(order) {
       const banner = document.getElementById('owner-alert-banner');
       document.getElementById('alert-customer-name').textContent = `${order.customerName} (${order.id})`;
-      document.getElementById('alert-order-summary').textContent = `${order.items} — $${order.total.toLocaleString('es-MX')} MXN`;
+      document.getElementById('alert-order-summary').textContent = `${order.items} — $${Number(order.total).toLocaleString('es-MX')} MXN`;
       document.getElementById('alert-customer-phone').textContent = `Tel: ${order.customerPhone}`;
       const customerWaMsg = encodeURIComponent(`Hola ${order.customerName}, recibimos tu pedido ${order.id} en Dxnzz Store (${order.items}).`);
       document.getElementById('alert-wa-link').href = `https://wa.me/521${order.customerPhone}?text=${customerWaMsg}`;
@@ -1092,7 +1193,7 @@
               <span class="text-xs font-semibold text-gold">${o.id} · ${o.customerName}</span>
               <span class="text-[10px] text-neutral-500">${o.date}</span>
             </div>
-            <p class="text-xs text-white">${o.items} — <span class="text-gold font-semibold">$${o.total.toLocaleString('es-MX')} MXN</span></p>
+            <p class="text-xs text-white">${o.items} — <span class="text-gold font-semibold">$${Number(o.total).toLocaleString('es-MX')} MXN</span></p>
             <p class="text-[11px] text-neutral-400">Teléfono cliente: <span class="text-white font-medium">${o.customerPhone}</span> · ${o.paymentMethod}</p>
             <p class="text-[11px] text-neutral-500">Dirección: ${o.address}</p>
             <div class="pt-2 flex flex-wrap gap-2">
@@ -1108,11 +1209,15 @@
       }).join('');
     }
 
-    function clearAllOrders() {
+    async function clearAllOrders() {
       if (!isOwnerLoggedIn) return;
-      orders = [];
-      localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(orders));
-      renderOwnerOrders();
+      if (db) {
+        await db.ref('orders').remove();
+      } else {
+        orders = [];
+        localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(orders));
+        renderOwnerOrders();
+      }
     }
 
     // Configuración Dueño
@@ -1121,14 +1226,18 @@
       document.getElementById('set-payment-link').value = settings.paymentLink || '';
     }
 
-    function saveOwnerSettings(e) {
+    async function saveOwnerSettings(e) {
       e.preventDefault();
       if (!isOwnerLoggedIn) return;
       settings.waNumber = document.getElementById('set-wa-number').value.trim();
       settings.paymentLink = document.getElementById('set-payment-link').value.trim();
-      localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
+      if (db) {
+        await db.ref('settings').set(settings);
+      } else {
+        localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
+      }
       updateFooterLinks();
-      alert('Configuración guardada correctamente.');
+      alert('Configuración guardada en vivo.');
     }
 
     function updateFooterLinks() {
@@ -1179,7 +1288,7 @@
       document.getElementById('review-modal').classList.add('hidden');
     }
 
-    function submitReview(e) {
+    async function submitReview(e) {
       e.preventDefault();
       const author = document.getElementById('rev-author').value.trim();
       const product = document.getElementById('rev-product').value.trim();
@@ -1187,27 +1296,33 @@
       const rating = Math.max(0, Math.min(5, parseInt(document.getElementById('rev-rating').value, 10) || 0));
       if (!author || !product || !comment) return;
 
-      reviews.unshift({
-        id: 'rev_' + Date.now(),
-        author,
-        product,
-        comment,
-        rating
-      });
-      localStorage.setItem(STORAGE_KEYS.REVIEWS, JSON.stringify(reviews));
+      const revId = 'rev_' + Date.now();
+      const newReview = { id: revId, author, product, comment, rating, createdAt: Date.now() };
+
+      if (db) {
+        await db.ref(`reviews/${revId}`).set(newReview);
+      } else {
+        reviews.unshift(newReview);
+        localStorage.setItem(STORAGE_KEYS.REVIEWS, JSON.stringify(reviews));
+        renderReviews();
+      }
+
       document.getElementById('rev-author').value = '';
       document.getElementById('rev-product').value = '';
       document.getElementById('rev-comment').value = '';
       setReviewRating(5);
       closeReviewModal();
-      renderReviews();
     }
 
-    function deleteReview(id) {
+    async function deleteReview(id) {
       if (!isOwnerLoggedIn) return;
-      reviews = reviews.filter(r => r.id !== id);
-      localStorage.setItem(STORAGE_KEYS.REVIEWS, JSON.stringify(reviews));
-      renderReviews();
+      if (db) {
+        await db.ref(`reviews/${id}`).remove();
+      } else {
+        reviews = reviews.filter(r => r.id !== id);
+        localStorage.setItem(STORAGE_KEYS.REVIEWS, JSON.stringify(reviews));
+        renderReviews();
+      }
     }
 
     function renderReviews() {
