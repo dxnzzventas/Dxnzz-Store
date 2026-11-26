@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <!-- Firebase SDK (Base de datos en vivo) -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
   <script>
@@ -72,7 +72,7 @@
 </head>
 <body class="bg-black text-white min-h-screen flex flex-col selection:bg-gold selection:text-black">
 
-  <!-- Barra de Notificación Rápida (Solo visible en sesión de dueño al recibir pedido en vivo) -->
+  <!-- Barra de Notificación Rápida (Solo visible en sesión de dueño al recibir pedido) -->
   <div id="owner-alert-banner" class="hidden fixed top-4 right-4 z-50 max-w-sm w-full bg-[#080808] border border-gold shadow-2xl rounded-lg p-4 transition-all">
     <div class="flex items-start justify-between gap-3">
       <div>
@@ -275,7 +275,7 @@
     <div class="bg-[#080808] border border-gold rounded-lg max-w-3xl w-full p-5 sm:p-6 my-auto max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
         <div>
-          <span class="text-[10px] uppercase tracking-[0.25em] text-gold block">Administración en Vivo</span>
+          <span class="text-[10px] uppercase tracking-[0.25em] text-gold block">Administración</span>
           <h3 class="font-display text-lg tracking-wider text-white">PANEL DXNZZ STORE</h3>
         </div>
         <button onclick="closeOwnerPanel()" class="text-neutral-400 hover:text-white text-sm px-2 py-1">✕</button>
@@ -341,7 +341,7 @@
           </div>
 
           <button id="save-product-btn" type="submit" class="bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest px-5 py-2.5 rounded transition">
-            Publicar en Vivo
+            Publicar Producto
           </button>
         </form>
 
@@ -414,16 +414,16 @@
           <div>
             <label class="block text-[11px] text-neutral-400 mb-1">Método de pago</label>
             <select id="cust-payment-method" class="w-full bg-black border border-white/15 focus:border-gold rounded px-3 py-2 text-xs text-white outline-none">
-              <option value="Tarjeta en línea (Mercado Pago / Stripe)">Tarjeta de Crédito o Débito en línea</option>
-              <option value="Transferencia / Depósito">Transferencia bancaria / Depósito</option>
+              <option value="Tarjeta de Crédito o Débito en línea">Tarjeta de Crédito o Débito en línea</option>
+              <option value="Transferencia bancaria / Depósito">Transferencia bancaria / Depósito</option>
             </select>
           </div>
         </div>
 
         <div id="order-success-box" class="hidden border border-gold bg-black rounded-lg p-4 mt-4 space-y-3">
           <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-semibold block">Pedido Registrado</span>
-          <p class="text-xs text-neutral-300 leading-relaxed">
-            Tu pedido quedó registrado en vivo. Completa el pago con tarjeta o envía el comprobante directo por WhatsApp para confirmar tu envío.
+          <p id="order-success-desc" class="text-xs text-neutral-300 leading-relaxed">
+            Tu pedido quedó registrado. Completa el pago con tarjeta o envía el comprobante directo por WhatsApp para confirmar tu envío.
           </p>
           <div class="space-y-2 pt-1">
             <a id="checkout-pay-card-btn" href="#" target="_blank" class="block w-full text-center bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-wider py-2.5 rounded transition">
@@ -489,7 +489,7 @@
   </div>
 
   <script>
-    // Configuración de Firebase Realtime Database (Sincronización en vivo)
+    // Configuración de Firebase Realtime Database
     const FIREBASE_CONFIG = {
       apiKey: "AIzaSyAx8UNhWU4XG2B0dAw2-CzcIV6ktUNGOrs",
       authDomain: "dxnzz-store.firebaseapp.com",
@@ -554,7 +554,6 @@
       updateFooterLinks();
 
       if (db) {
-        // Escuchar catálogo en vivo para todos los visitantes
         db.ref('products').on('value', (snap) => {
           const data = snap.val();
           products = data ? Object.values(data).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)) : [];
@@ -562,14 +561,12 @@
           if (isOwnerLoggedIn) renderOwnerProducts();
         });
 
-        // Escuchar reseñas en vivo
         db.ref('reviews').on('value', (snap) => {
           const data = snap.val();
           reviews = data ? Object.values(data).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)) : [];
           renderReviews();
         });
 
-        // Escuchar configuración de WhatsApp y enlace de pago en vivo
         db.ref('settings').on('value', (snap) => {
           const data = snap.val();
           if (data) {
@@ -578,13 +575,11 @@
           }
         });
 
-        // Escuchar cuentas registradas en vivo
         db.ref('users').on('value', (snap) => {
           const data = snap.val();
           registeredUsers = data ? Object.values(data) : [];
         });
 
-        // Escuchar pedidos en vivo y notificar al dueño al instante
         db.ref('orders').on('value', (snap) => {
           const data = snap.val();
           const incoming = data ? Object.values(data).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)) : [];
@@ -789,7 +784,7 @@
       activeBtn.classList.add('border-gold', 'bg-gold', 'text-black', 'font-semibold');
     }
 
-    // Comprimir foto automáticamente para subida rápida en vivo
+    // Comprimir foto automáticamente para subida rápida
     function previewUploadedImage(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -879,7 +874,7 @@
         resetProductForm();
       } finally {
         saveBtn.disabled = false;
-        saveBtn.textContent = 'Publicar en Vivo';
+        saveBtn.textContent = 'Publicar Producto';
       }
     }
 
@@ -1138,8 +1133,23 @@
       const cleanOwnerWa = settings.waNumber.replace(/\D/g, '');
       const ownerWaUrl = `https://wa.me/${cleanOwnerWa}?text=${waText}`;
 
-      document.getElementById('checkout-pay-card-btn').href = settings.paymentLink || '#';
-      document.getElementById('checkout-send-wa-btn').href = ownerWaUrl;
+      const payCardBtn = document.getElementById('checkout-pay-card-btn');
+      const sendWaBtn = document.getElementById('checkout-send-wa-btn');
+      const successDesc = document.getElementById('order-success-desc');
+      const isTransferOrDeposit = paymentMethod.toLowerCase().includes('transferencia');
+
+      payCardBtn.href = settings.paymentLink || '#';
+      sendWaBtn.href = ownerWaUrl;
+
+      if (isTransferOrDeposit) {
+        payCardBtn.classList.add('hidden');
+        sendWaBtn.className = 'block w-full text-center bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-wider py-2.5 rounded transition';
+        successDesc.textContent = 'Tu pedido quedó registrado. Envíanos un mensaje por WhatsApp para compartirte los datos de transferencia o depósito y confirmar tu envío.';
+      } else {
+        payCardBtn.classList.remove('hidden');
+        sendWaBtn.className = 'block w-full text-center border border-white/20 hover:border-gold text-white text-xs font-medium py-2.5 rounded transition';
+        successDesc.textContent = 'Tu pedido quedó registrado. Completa el pago con tarjeta o envía el comprobante directo por WhatsApp para confirmar tu envío.';
+      }
 
       cart = [];
       renderProducts();
@@ -1237,7 +1247,7 @@
         localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
       }
       updateFooterLinks();
-      alert('Configuración guardada en vivo.');
+      alert('Configuración guardada.');
     }
 
     function updateFooterLinks() {
